@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+:root {
+    --red: #eb0028;
+    --gray: rgb(24, 24, 24);
+    --gray_half: rgba(24, 24, 24, .2);
+    --gray_bg: rgba(24, 24, 24, .15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: var(--gray);
+}
+
+main {
+    padding: 50px;
+}
+
+.icon {
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    color: white;
+    background-color: var(--red);
+    border: 2px solid var(--red);
+    padding: 14px 32px;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+button:hover {
+    color: var(--red);
+    background-color: transparent;
+    border: 2px solid var(--red);
+}
+
+input {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid var(--red) !important;
+    border-radius: 0 !important;
+}
+
+input:focus-visible,
+input:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

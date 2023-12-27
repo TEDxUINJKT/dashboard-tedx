@@ -1,0 +1,72 @@
+.sidebar {
+    background-color: white;
+    min-height: 100vh;
+    width: 20vw;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    list-style: none;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+.navigation li a {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 25px;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile_detail {
+    display: flex;
+    flex-direction: column
+}
+
+.profile_detail p:first-child {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 0 !important;
+}
+
+.profile span {
+    display: block;
+    font-size: 1.4em;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.profile span:hover {
+    color: var(--red);
+}
+
+.active a {
+    background-color: var(--gray_bg);
+    border-radius: 100px;
+}
+
+.active a svg {
+    color: var(--red);
+}

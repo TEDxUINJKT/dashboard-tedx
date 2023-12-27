@@ -1,0 +1,10 @@
+.error_message {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    font-size: 1.1em;
+    border-radius: 10px;
+    background-color: rgba(235, 87, 87, .2);
+}
