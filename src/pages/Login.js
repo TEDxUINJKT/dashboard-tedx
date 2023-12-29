@@ -13,8 +13,7 @@ export default function Login() {
     const { error = { status: false } } = useSelector(states => states)
     const dispatch = useDispatch()
 
-    const [username, setUsername] = useState('')
-    const [pass, setPass] = useState('')
+    const [formData, setFormData] = useState({ username: null, password: null })
 
     const [showPass, setShowPass] = useState(false)
 
@@ -23,13 +22,13 @@ export default function Login() {
         e.preventDefault()
 
         // Middleware pass
-        dispatch(asyncLogin(username, pass))
+        dispatch(asyncLogin(formData.username, formData.password))
     }
 
     return (
         <main className={style.layout}>
             <section>
-                <img src={logo} alt="brand logo" width="70%" />
+                <img src={logo} alt="brand logo" width="80%" style={{ marginBottom: '40px' }} />
                 {/* Error Display */}
                 {error.status && (
                     <div style={{ width: '70%' }}>
@@ -41,7 +40,7 @@ export default function Login() {
                     <Row>
                         <Col>
                             <Form.Group>
-                                <Form.Control placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} type="text" required />
+                                <Form.Control placeholder="Username" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} type="text" required />
                             </Form.Group>
                         </Col>
                     </Row>
@@ -49,7 +48,7 @@ export default function Login() {
                         <Col>
                             <Form.Group>
                                 <InputGroup>
-                                    <Form.Control placeholder="Password" value={pass} onChange={(e) => setPass(e.target.value)} type={showPass ? 'text' : 'password'} required />
+                                    <Form.Control placeholder="Password" value={formData.pass} onChange={(e) => setFormData({ ...formData, password: e.target.value })} type={showPass ? 'text' : 'password'} required />
                                     <button className={style.show_pass_btn} onClick={() => setShowPass(!showPass)} type="button" >
                                         {showPass ? <FaRegEye /> : <FaRegEyeSlash />}
                                     </button>

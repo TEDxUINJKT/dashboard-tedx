@@ -6,12 +6,14 @@
     justify-content: space-between;
     flex-direction: column;
     padding: 20px;
+    transform: translateX(0%);
+    transition: .3s;
 }
 
 .navigation {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     padding: 0;
     list-style: none;
 }
@@ -23,13 +25,18 @@
     height: 100px;
 }
 
+.back_button_layout {
+    display: none;
+}
+
 .navigation li a {
     display: flex;
     align-items: center;
     gap: 20px;
-    padding: 15px 25px;
-    font-size: 1.2em;
+    padding: 0 25px;
+    font-size: 1em;
     font-weight: 500;
+    transition: .2s;
 }
 
 .profile {
@@ -63,10 +70,40 @@
 }
 
 .active a {
+    padding: 15px 25px !important;
     background-color: var(--gray_bg);
     border-radius: 100px;
 }
 
 .active a svg {
     color: var(--red);
+}
+
+@media only screen and (max-width: 600px) {
+    .show {
+        transform: translateX(0%) !important;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        position: absolute;
+        width: 100vw;
+        z-index: 100;
+    }
+
+    .brand {
+        display: none;
+    }
+
+    .back_button_layout {
+        padding: 0 0 20px 0;
+        display: flex;
+    }
+
+    .back_button {
+        background-color: var(--gray_bg);
+        padding: 15px;
+        font-size: 1.2em;
+        border-radius: 10px;
+    }
 }

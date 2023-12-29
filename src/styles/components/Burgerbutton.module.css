@@ -1,0 +1,23 @@
+.layout {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .layout {
+        display: block;
+        padding: 20px;
+        display: flex;
+        position: fixed;
+        background-color: white;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .burger_button {
+        background-color: var(--gray_bg);
+        padding: 10px;
+        font-size: 1.5em;
+        border-radius: 10px;
+    }
+}

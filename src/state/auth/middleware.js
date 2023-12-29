@@ -5,11 +5,11 @@ import api from '../../utils/api'
 import cookies from '../../utils/cookies'
 import axios from 'axios'
 
-function asyncLogin(email, password) {
+function asyncLogin(username, password) {
     return async dispatch => {
         try {
             // Fetch Login
-            const response = await api.Login(email, password)
+            const response = await api.Login(username, password)
 
             //Setup Cookies 
             cookies.remove('access_token')

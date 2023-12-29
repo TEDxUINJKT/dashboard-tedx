@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 :root {
+    --yellow: #ffd503;
     --red: #eb0028;
     --gray: rgb(24, 24, 24);
+    --gray_sub: rgba(24, 24, 24, .5);
     --gray_half: rgba(24, 24, 24, .2);
     --gray_bg: rgba(24, 24, 24, .15);
 }
@@ -22,6 +24,7 @@ a {
 
 main {
     padding: 50px;
+    min-height: 100vh;
 }
 
 .icon {
@@ -46,7 +49,24 @@ button:hover {
     border: 2px solid var(--red);
 }
 
-input {
+.button_secondary {
+    color: var(--red);
+    background-color: white;
+    border: 2px solid var(--red);
+    padding: 14px 32px;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+.button_secondary:hover {
+    color: white;
+    background-color: var(--red);
+    border: 2px solid var(--red);
+}
+
+input,
+select {
+    padding: 10px 5px !important;
     background-color: transparent !important;
     border: none !important;
     border-bottom: 2px solid var(--red) !important;
@@ -54,7 +74,9 @@ input {
 }
 
 input:focus-visible,
-input:focus {
+input:focus,
+select:focus-visible,
+select:focus {
     box-shadow: none !important;
     outline: none !important;
 }
@@ -63,4 +85,60 @@ input:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.flex-horizontal {
+    flex-direction: column;
+}
+
+.lefted {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.righted {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table,
+tr {
+    border-bottom: 2px solid var(--gray_half);
+}
+
+th {
+    color: var(--gray_sub);
+    font-size: 1.1em;
+}
+
+th,
+td {
+    padding: 10px;
+}
+
+tr .action_table {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: var(--gray_bg)
+}
+
+th:last-child {
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    main {
+        padding: 20px;
+    }
 }

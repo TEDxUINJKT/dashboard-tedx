@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar";
+import Burgerbutton from "./components/Burgerbutton"
+
+import style from './styles/layout.module.css'
 
 export default function Layout({ children }) {
     const { pathname } = useLocation();
@@ -10,22 +13,11 @@ export default function Layout({ children }) {
         window.scrollTo(0, 0);
     }, [pathname]);
 
-    const layout = {
-        display: 'flex',
-        justifyContent: 'space-between',
-    }
-
-    const main = {
-        display: 'flex',
-        flexDirection: 'column',
-        width: '80vw',
-
-    }
-
     return (
-        <div style={layout}>
+        <div className={style.layout}>
             <Sidebar />
-            <main style={main}>
+            <main className={style.main}>
+                <Burgerbutton />
                 {children}
             </main >
         </div>

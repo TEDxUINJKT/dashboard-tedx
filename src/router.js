@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { asyncRefreshToken, asyncCheckLogin, asyncLogout } from './state/auth/middleware'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
+import SidebarContext from "./utils/SidebarContext";
 import Layout from './layout';
 
 import Login from './pages/Login'
@@ -16,6 +17,9 @@ import Page404 from './pages/Page404'
 export default function AppRouter() {
     const { auth = {} } = useSelector(states => states)
     const dispatch = useDispatch()
+
+    const [show, setShow] = useState(false);
+    const value = { show, setShow };
 
     // Refresh Token Cycle
     useEffect(() => {
@@ -49,16 +53,18 @@ export default function AppRouter() {
                     <Route path="*" element={<Page404 />} />
                 </Routes>
             ) : (
-                <Layout>
-                    <Routes>
-                        <Route exact path="/" element={<Home />} />
-                        <Route path="/event" element={<Event />} />
-                        <Route path="/partner" element={<Partner />} />
-                        <Route path="/content" element={<Content />} />
-                        <Route path="/access" element={<Access />} />
-                        <Route path="*" element={<Page404 />} />
-                    </Routes>
-                </Layout>
+                <SidebarContext.Provider value={value}>
+                    <Layout>
+                        <Routes>
+                            <Route exact path="/" element={<Home />} />
+                            <Route path="/event" element={<Event />} />
+                            <Route path="/partner" element={<Partner />} />
+                            <Route path="/content" element={<Content />} />
+                            <Route path="/access" element={<Access />} />
+                            <Route path="*" element={<Page404 />} />
+                        </Routes>
+                    </Layout>
+                </SidebarContext.Provider>
             )}
         </Router>
     )

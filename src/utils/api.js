@@ -14,7 +14,6 @@ export default (() => {
         }
 
         const response = await axios.post(url, data)
-
         return response
     }
 
@@ -32,8 +31,53 @@ export default (() => {
         }
     }
 
+    async function Get_User_List() {
+        const url = baseUrl + '/auth/users'
+        const response = await axios.get(url)
+        return response
+    }
+
+    async function Register_User(data) {
+        const url = baseUrl + '/auth/register'
+
+        const payload = {
+            username: data.username,
+            display_name: data.display_name,
+            password: data.password,
+            role: data.role
+        }
+
+        const response = await axios.post(url, payload)
+        return response
+    }
+
+    async function Update_User(data) {
+        const url = baseUrl + `/auth/update/${data._id}`
+
+        const payload = {
+            username: data.username,
+            display_name: data.display_name,
+            password: data.password,
+            role: data.role
+        }
+
+        const response = await axios.patch(url, payload)
+        return response
+    }
+
+    async function Delete_User(id) {
+        const url = baseUrl + `/auth/delete/${id}`
+
+        const response = await axios.delete(url)
+        return response
+    }
+
     return {
         Login,
-        Refresh
+        Refresh,
+        Get_User_List,
+        Register_User,
+        Update_User,
+        Delete_User
     }
 })()
