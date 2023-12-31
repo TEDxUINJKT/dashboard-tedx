@@ -141,4 +141,8 @@ th:last-child {
     main {
         padding: 20px;
     }
+
+    table {
+        font-size: 1em
+    }
 }

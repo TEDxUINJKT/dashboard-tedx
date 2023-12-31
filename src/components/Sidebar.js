@@ -13,6 +13,7 @@ import { TbCirclesRelation } from "react-icons/tb";
 import { BiBookContent } from "react-icons/bi";
 import { RiLogoutCircleRLine, RiNodeTree } from "react-icons/ri";
 import { IoArrowBackOutline } from "react-icons/io5";
+import { PiMicrophoneStageBold } from "react-icons/pi";
 
 import style from '../styles/components/Sidebar.module.css'
 
@@ -39,7 +40,7 @@ export default function Sidebar() {
                         </div>
                     </IconContext.Provider>
                 </div>
-                <li className={pathname === '/' ? style.active : null}>
+                <li className={pathname === '/' ? style.active : null} onClick={() => setShow(!show)}>
                     <Link to="/">
                         <IconContext.Provider value={{ className: "icon" }}>
                             <FiHome />
@@ -47,7 +48,7 @@ export default function Sidebar() {
                         Home
                     </Link>
                 </li>
-                <li className={pathname === '/event' ? style.active : null}>
+                <li className={pathname.includes('/event') ? style.active : null} onClick={() => setShow(!show)}>
                     <Link to="/event">
                         <IconContext.Provider value={{ className: "icon" }}>
                             <MdEventNote />
@@ -55,7 +56,7 @@ export default function Sidebar() {
                         Event
                     </Link>
                 </li>
-                <li className={pathname === '/partner' ? style.active : null}>
+                <li className={pathname === '/partner' ? style.active : null} onClick={() => setShow(!show)}>
                     <Link to="/partner">
                         <IconContext.Provider value={{ className: "icon" }}>
                             <TbCirclesRelation />
@@ -63,7 +64,15 @@ export default function Sidebar() {
                         Partner
                     </Link>
                 </li>
-                <li className={pathname === '/content' ? style.active : null}>
+                <li className={pathname === '/speaker' ? style.active : null} onClick={() => setShow(!show)}>
+                    <Link to="/speaker">
+                        <IconContext.Provider value={{ className: "icon" }}>
+                            <PiMicrophoneStageBold />
+                        </IconContext.Provider>
+                        Speaker
+                    </Link>
+                </li>
+                <li className={pathname === '/content' ? style.active : null} onClick={() => setShow(!show)}>
                     <Link to="/content">
                         <IconContext.Provider value={{ className: "icon" }}>
                             <BiBookContent />
@@ -71,7 +80,7 @@ export default function Sidebar() {
                         Content
                     </Link>
                 </li>
-                <li className={pathname === '/access' ? style.active : null}>
+                <li className={pathname === '/access' ? style.active : null} onClick={() => setShow(!show)}>
                     <Link to="/access">
                         <IconContext.Provider value={{ className: "icon" }}>
                             <RiNodeTree />

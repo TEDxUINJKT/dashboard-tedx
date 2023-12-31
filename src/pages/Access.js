@@ -97,26 +97,26 @@ function FormCreate({ data, setData, handler }) {
   return (
     <Form className={style.form_access} onSubmit={(event) => handler(event, data)}>
       <Row>
-        <Col className="col-sm-6 col-12">
+        <Col className="col-sm-6 col-12 my-3">
           <Form.Group>
             <Form.Control placeholder="Username" value={data.username} onChange={(e) => setData({ ...data, username: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
-        <Col className="col-sm-6 col-12">
+        <Col className="col-sm-6 col-12 my-3">
           <Form.Group>
             <Form.Control placeholder="Display Name" value={data.display_name} onChange={(e) => setData({ ...data, display_name: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
       </Row>
-      <Row className="my-3">
-        <Col className="col-sm-6 col-12">
+      <Row>
+        <Col className="col-sm-6 col-12 my-3">
           <Form.Group>
             <Form.Control placeholder="Password" value={data.password} onChange={(e) => setData({ ...data, password: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
-        <Col className="col-sm-6 col-12">
+        <Col className="col-sm-6 col-12 my-3">
           <Form.Group>
-            <Form.Select placeholder="Role" value={data.role} onChange={(e) => setData({ ...data, role: e.target.value })} type="text" required>
+            <Form.Select selected="Guest" placeholder="Role" value={data.role} onChange={(e) => setData({ ...data, role: e.target.value })} type="text" required>
               <option value="Guest">Guest</option>
               <option value="Sysadmin">Sysadmin</option>
               <option value="Event">Event</option>
@@ -139,24 +139,24 @@ function FormEdit({ data, setData, handler }) {
   return (
     <Form className={style.form_access} onSubmit={(event) => handler(event, data)}>
       <Row>
-        <Col className="col-sm-6 col-12">
+        <Col className="col-sm-6 col-12 my-3">
           <Form.Group>
             <Form.Control placeholder="Username" value={data.username} onChange={(e) => setData({ ...data, username: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
-        <Col className="col-sm-6 col-12">
+        <Col className="col-sm-6 col-12 my-3">
           <Form.Group>
             <Form.Control placeholder="Display Name" value={data.display_name} onChange={(e) => setData({ ...data, display_name: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
       </Row>
-      <Row className="my-3">
-        <Col className="col-sm-6 col-12">
+      <Row>
+        <Col className="col-sm-6 col-12 my-3">
           <Form.Group>
             <Form.Control placeholder="Password" value={data.password} onChange={(e) => setData({ ...data, password: e.target.value })} type="text" />
           </Form.Group>
         </Col>
-        <Col className="col-sm-6 col-12">
+        <Col className="col-sm-6 col-12 my-3">
           <Form.Group>
             <Form.Select placeholder="Role" value={data.role} onChange={(e) => setData({ ...data, role: e.target.value })} type="text" required>
               <option value="Guest">Guest</option>

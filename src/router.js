@@ -9,7 +9,9 @@ import Layout from './layout';
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Event from './pages/Event'
+import EventDetail from "./pages/EventDetail";
 import Partner from './pages/Partner'
+import Speaker from './pages/Speaker'
 import Content from './pages/Content'
 import Access from './pages/Access'
 import Page404 from './pages/Page404'
@@ -58,9 +60,11 @@ export default function AppRouter() {
                         <Routes>
                             <Route exact path="/" element={<Home />} />
                             <Route path="/event" element={<Event />} />
+                            <Route path="/event/manage/:id" element={<EventDetail />} />
                             <Route path="/partner" element={<Partner />} />
                             <Route path="/content" element={<Content />} />
                             <Route path="/access" element={<Access />} />
+                            <Route path="/speaker" element={<Speaker />} />
                             <Route path="*" element={<Page404 />} />
                         </Routes>
                     </Layout>

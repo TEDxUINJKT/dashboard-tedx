@@ -1,0 +1,18 @@
+.header_layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5vh;
+}
+
+.header_layout button {
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+.card_container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

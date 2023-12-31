@@ -1,0 +1,79 @@
+.form_image {
+    border: 2px solid var(--gray_half);
+    border-radius: 8px;
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.non_image_display_card {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    border: 2px dashed var(--gray_half);
+}
+
+.non_image_display_card span {
+    font-size: 1em;
+}
+
+.text_browse {
+    color: var(--red);
+    font-weight: 700;
+}
+
+.image_display_card {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid var(--gray_half);
+}
+
+.image_display_card span {
+    min-width: 90%;
+    max-width: 90%;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    color: var(--gray);
+    font-weight: 600;
+    font-size: 1.1em;
+    padding: 10px 20px;
+}
+
+.image_display_card button {
+    border: none;
+    background-color: transparent;
+    color: var(--red);
+    padding: 0;
+    font-size: 1.5em;
+}
+
+.form_image_btn {
+    font-size: 1em;
+    width: 100%;
+    padding: 16px 0;
+    color: white;
+    background-color: var(--red);
+    border: 2px solid var(--red);
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.form_image_btn:hover {
+    color: var(--red);
+    background-color: white;
+}
