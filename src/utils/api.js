@@ -266,6 +266,59 @@ export default (() => {
         return response
     }
 
+    async function Get_Content_Version(version) {
+        const url = baseUrl + `/content/${version}`
+
+        const response = await axios.get(url)
+        return response
+    }
+
+    async function Add_Content(data) {
+        const url = baseUrl + '/content'
+
+        const form = new FormData()
+
+        const parsed_data = {
+            link: data.data?.link,
+            title: data.data?.title,
+            description: data.data?.description
+        }
+
+        form.append('type', data.type)
+        form.append('version', data.version)
+        form.append('data', JSON.stringify(parsed_data))
+        form.append('file', data.data.image?.file ?? null)
+
+        const response = await axios.post(url, form)
+        return response
+    }
+
+    async function Update_Content(data) {
+        const url = baseUrl + `/content/${data._id}`
+
+        const form = new FormData()
+
+        const parsed_data = {
+            link: data.data?.link,
+            title: data.data?.title,
+            description: data.data?.description
+        }
+
+
+        form.append('data', JSON.stringify(parsed_data))
+        form.append('file', data.data.image?.file ?? null)
+
+        const response = await axios.patch(url, form)
+        return response
+    }
+
+    async function Delete_Content(content_id) {
+        const url = baseUrl + `/content/${content_id}`
+
+        const response = await axios.delete(url)
+        return response
+    }
+
     return {
         Login,
         Refresh,
@@ -291,6 +344,10 @@ export default (() => {
         Get_Ticket_List,
         Add_Ticket,
         Update_Ticket,
-        Delete_Ticket
+        Delete_Ticket,
+        Get_Content_Version,
+        Add_Content,
+        Update_Content,
+        Delete_Content
     }
 })()

@@ -56,8 +56,9 @@ export default function Access() {
       <table>
         <thead>
           <tr>
+            <th>No</th>
             <th>Username</th>
-            <th>Display Name</th>
+            <th className="hide_mobile">Display Name</th>
             <th>Role</th>
             <th>Action</th>
           </tr>
@@ -65,8 +66,9 @@ export default function Access() {
         <tbody>
           {users?.map((user, index) => (
             <tr key={`data ${index}`}>
+              <td>{index + 1}.</td>
               <td>{user.username}</td>
-              <td>{user.display_name}</td>
+              <td className="hide_mobile">{user.display_name}</td>
               <td>{user.role}</td>
               <td className="action_table">
                 <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', title: 'Edit Access' }); setFormData({ ...user, password: null }); }}>

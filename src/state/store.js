@@ -7,6 +7,7 @@ import PartnersReducer from "./partners/reducer"
 import SpeakersReducer from "./speakers/reducer"
 import EventsReducer from "./events/reducer"
 import TicketsReducer from "./tickets/reducer"
+import ContentsReducer from "./contents/reducer"
 
 const store = configureStore({
     reducer: {
@@ -16,7 +17,8 @@ const store = configureStore({
         partners: PartnersReducer,
         speakers: SpeakersReducer,
         events: EventsReducer,
-        tickets: TicketsReducer
+        tickets: TicketsReducer,
+        contents: ContentsReducer
     }
 });
 
