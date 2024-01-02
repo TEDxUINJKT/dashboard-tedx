@@ -20,6 +20,8 @@
     height: fit-content;
     border-radius: 10px;
     transition: .2s;
+    max-height: 80vh;
+    overflow: auto;
 }
 
 .hide {

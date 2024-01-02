@@ -1,0 +1,169 @@
+.page_layout {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--red);
+    height: 100%;
+}
+
+.page_content span {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.page_content h1 {
+    color: var(--gray);
+    text-align: center;
+    font-size: 5em;
+    font-family: 'Monument Extended';
+    line-height: 1em;
+}
+
+.bg1 {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    z-index: -10;
+}
+
+.bg2 {
+    position: absolute;
+    right: 0;
+    top: 40%;
+    z-index: -10;
+}
+
+@media only screen and (min-width: 600px) {
+    .page_layout {
+        position: relative;
+    }
+
+    .bg1,
+    .bg2 {
+        opacity: .6;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .page_content span {
+        font-size: 1.2em;
+    }
+
+    .page_content h1 {
+        font-size: 1.5em;
+    }
+}
+
+
+
+/* .modern_carousel {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 580px;
+    transition: all .5s;
+    transform: translateX(10%);
+    z-index: -10;
+    animation: scale;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    opacity: .5;
+}
+
+.box_wrapper {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    transition: all 10s;
+    transform: rotateZ(0) rotateX(0) rotateY(0);
+    transform-style: preserve-3d;
+    animation: rotate;
+    animation-iteration-count: infinite;
+    animation-duration: 10s;
+    animation-direction: alternate;
+}
+
+.side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transition: all .5s;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side:nth-child(1) {
+    background-image: url("../../assets/butterflybw.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform-origin: center left;
+    transform: rotateY(90deg) translateX(-100px);
+}
+
+.side:nth-child(2) {
+    background-image: url("../../assets/butterflybw.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform-origin: center right;
+    transform: rotateY(90deg) translateX(100px);
+}
+
+.side:nth-child(3) {
+    background-image: url("../../assets/butterflybw.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform-origin: center top;
+    transform: rotateX(-90deg) translateY(-100px);
+}
+
+.side:nth-child(4) {
+    background-image: url("../../assets/butterflybw.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform-origin: center bottom;
+    transform: rotateX(90deg) translateY(100px);
+}
+
+.side:nth-child(5) {
+    background-image: url("../../assets/butterflybw.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform-origin: center right;
+    transform: translateZ(-100px);
+}
+
+.side:nth-child(6) {
+    background-image: url("../../assets/butterflybw.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform-origin: center bottom;
+    transform: translateZ(100px);
+}
+
+@keyframes scale {
+    to {
+        perspective: 1500px;
+    }
+}
+
+@keyframes rotate {
+    to {
+        transform: rotateZ(0deg) rotateX(200deg) rotateY(300deg);
+    }
+} */
