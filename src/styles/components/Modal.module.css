@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: center;
     transition: .3s;
+    z-index: 100000;
 }
 
 .modal {
