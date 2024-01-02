@@ -71,6 +71,7 @@ export default function Partner() {
         <table>
           <thead>
             <tr>
+              <th>No</th>
               <th>Organization</th>
               <th>Version</th>
               <th>Action</th>
@@ -79,6 +80,7 @@ export default function Partner() {
           <tbody>
             {partners.sponsor?.map((sponsor, index) => (
               <tr key={`data ${index}`}>
+                <td>{index + 1}.</td>
                 <td>{sponsor.organization}</td>
                 <td>{sponsor.version}</td>
                 <td className="action_table">
@@ -111,6 +113,7 @@ export default function Partner() {
         <table>
           <thead>
             <tr>
+              <th>No</th>
               <th>Organization</th>
               <th>Version</th>
               <th>Action</th>
@@ -119,6 +122,7 @@ export default function Partner() {
           <tbody>
             {partners.medpart?.map((medpart, index) => (
               <tr key={`data ${index}`}>
+                <td>{index + 1}.</td>
                 <td>{medpart.organization}</td>
                 <td>{medpart.version}</td>
                 <td className="action_table">

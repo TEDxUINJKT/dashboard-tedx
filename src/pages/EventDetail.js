@@ -101,7 +101,7 @@ export default function EventDetail() {
           <Col className="col-12 col-sm-4">
             <img src={selected?.thumbnail?.url} alt="event thumbnail" width="100%" />
           </Col>
-          <Col className={`col-12 col-sm-8 ${style.detail_content}`}>
+          <Col className={`col-12 col-sm-8 ${style.detail_content} my-4`}>
             <div>
               <h3>{selected?.event}</h3>
               <span className={style.tag_type}>{selected.type}</span>
@@ -146,18 +146,20 @@ export default function EventDetail() {
         <table>
           <thead>
             <tr>
+              <th>No</th>
               <th>Type</th>
               <th>Price</th>
-              <th>Status</th>
+              <th className="hide_mobile">Status</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {tickets?.map((ticket, index) => (
               <tr key={`data ${index}`}>
+                <td>{index + 1}.</td>
                 <td>{ticket.type_ticket}</td>
                 <td>{ticket.price}</td>
-                <td>{ticket.status}</td>
+                <td className="hide_mobile">{ticket.status}</td>
                 <td className="action_table">
                   <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit ticket', title: 'Edit Ticket' }); setFormData(ticket); }}>
                     <IconContext.Provider value={{ className: "icon" }}>

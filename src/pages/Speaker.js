@@ -71,18 +71,20 @@ export default function Speaker() {
                 <table>
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Full Name</th>
                             <th>Organization</th>
-                            <th>Version</th>
+                            <th className="hide_mobile">Version</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {speakers.main?.map((main, index) => (
                             <tr key={`data ${index}`}>
+                                <td>{index + 1}.</td>
                                 <td>{main.full_name}</td>
                                 <td>{main.organization}</td>
-                                <td>{main.version}</td>
+                                <td className="hide_mobile">{main.version}</td>
                                 <td className="action_table">
                                     <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', group: 'main', title: 'Edit Access' }); setFormData(main); }}>
                                         <IconContext.Provider value={{ className: "icon" }}>
@@ -113,18 +115,20 @@ export default function Speaker() {
                 <table>
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Full Name</th>
                             <th>Organization</th>
-                            <th>Version</th>
+                            <th className="hide_mobile">Version</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {speakers.student?.map((student, index) => (
                             <tr key={`data ${index}`}>
+                                <td>{index + 1}.</td>
                                 <td>{student.full_name}</td>
                                 <td>{student.organization}</td>
-                                <td>{student.version}</td>
+                                <td className="hide_mobile">{student.version}</td>
                                 <td className="action_table">
                                     <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', group: 'student', title: 'Edit Access' }); setFormData(student); }}>
                                         <IconContext.Provider value={{ className: "icon" }}>

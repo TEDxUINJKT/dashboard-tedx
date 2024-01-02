@@ -36,3 +36,9 @@
     display: flex;
     gap: 20px;
 }
+
+@media only screen and (max-width: 600px) {
+    .content_card {
+        width: 90%;
+    }
+}
