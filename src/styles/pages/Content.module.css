@@ -32,6 +32,10 @@
     gap: 20px;
 }
 
+.content_card h5 {
+    text-transform: capitalize;
+}
+
 .content_cta {
     display: flex;
     gap: 20px;

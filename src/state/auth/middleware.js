@@ -1,5 +1,6 @@
 import { LoginAction, RefreshTokenAction, LogoutAction } from './action'
-import { ShowError, HideError } from '../error/middleware'
+import { StartLoadingActions, FetchLoadingActions, FinishLoadingActions } from '../loading/action'
+import { ShowError } from '../error/middleware'
 
 import api from '../../utils/api'
 import cookies from '../../utils/cookies'
@@ -7,7 +8,9 @@ import axios from 'axios'
 
 function asyncLogin(username, password) {
     return async dispatch => {
+        dispatch(StartLoadingActions())
         try {
+            dispatch(FetchLoadingActions())
             // Fetch Login
             const response = await api.Login(username, password)
 
@@ -26,10 +29,11 @@ function asyncLogin(username, password) {
 
             // Pass to Action
             dispatch(LoginAction(data))
-            dispatch(HideError())
         } catch (err) {
-            dispatch(ShowError('Cannot Login'))
+            ShowError('Email and Password Not Valid')
+            dispatch(FinishLoadingActions())
         }
+        dispatch(FinishLoadingActions())
     }
 }
 
@@ -48,7 +52,6 @@ function asyncCheckLogin() {
 
             // Pass to Action
             dispatch(LoginAction(auth_data))
-            dispatch(HideError())
         } catch (err) {
             // Do Nothing
         }
@@ -83,17 +86,19 @@ function asyncRefreshToken() {
 
 function asyncLogout() {
     return async dispatch => {
+        dispatch(StartLoadingActions())
         try {
             cookies.remove('access_token')
             sessionStorage.clear()
             delete axios.defaults.headers.common['Authorization']
-
+            dispatch(FetchLoadingActions())
             dispatch(LogoutAction())
             // Set Route to default
             window.location.assign("/")
         } catch (err) {
-            console.log(err)
+            // Do Nothing
         }
+        dispatch(FinishLoadingActions())
     }
 }
 

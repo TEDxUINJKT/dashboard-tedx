@@ -1,15 +1,21 @@
-import { IsErrorAction, IsntErrorAction } from './action'
+import Swal from 'sweetalert2';
+
+function ShowSuccess(message) {
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        confirmButtonColor: '#eb0028',
+        text: message,
+    });
+};
 
 function ShowError(message) {
-    return dispatch => {
-        dispatch(IsErrorAction(message))
-    }
-}
+    Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        confirmButtonColor: '#eb0028',
+        text: message,
+    });
+};
 
-function HideError() {
-    return dispatch => {
-        dispatch(IsntErrorAction())
-    }
-}
-
-export { ShowError, HideError }
+export { ShowSuccess, ShowError }

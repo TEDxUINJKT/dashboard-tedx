@@ -53,39 +53,45 @@ export default function Access() {
           </IconContext.Provider>
         </button>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Username</th>
-            <th className="hide_mobile">Display Name</th>
-            <th>Role</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users?.map((user, index) => (
-            <tr key={`data ${index}`}>
-              <td>{index + 1}.</td>
-              <td>{user.username}</td>
-              <td className="hide_mobile">{user.display_name}</td>
-              <td>{user.role}</td>
-              <td className="action_table">
-                <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', title: 'Edit Access' }); setFormData({ ...user, password: null }); }}>
-                  <IconContext.Provider value={{ className: "icon" }}>
-                    <FiEdit />
-                  </IconContext.Provider>
-                </div>
-                <div className={style.delete_button} onClick={() => { setShow({ value: true, type: 'remove', title: null }); setFormData({ ...user, password: null }); }}>
-                  <IconContext.Provider value={{ className: "icon" }}>
-                    <RiDeleteBin6Line />
-                  </IconContext.Provider>
-                </div>
-              </td>
+      {users.length > 0 ? (
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Username</th>
+              <th className="hide_mobile">Display Name</th>
+              <th>Role</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users?.map((user, index) => (
+              <tr key={`data ${index}`}>
+                <td>{index + 1}.</td>
+                <td>{user.username}</td>
+                <td className="hide_mobile">{user.display_name}</td>
+                <td>{user.role}</td>
+                <td className="action_table">
+                  <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', title: 'Edit Access' }); setFormData({ ...user, password: null }); }}>
+                    <IconContext.Provider value={{ className: "icon" }}>
+                      <FiEdit />
+                    </IconContext.Provider>
+                  </div>
+                  <div className={style.delete_button} onClick={() => { setShow({ value: true, type: 'remove', title: null }); setFormData({ ...user, password: null }); }}>
+                    <IconContext.Provider value={{ className: "icon" }}>
+                      <RiDeleteBin6Line />
+                    </IconContext.Provider>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <section className="centered">
+          <h5>No Item Found</h5>
+        </section>
+      )}
       <Modal setShow={setShow} isShow={isShow} >
         {isShow.type === 'add' && <FormCreate data={formData} setData={setFormData} handler={handleAdd} />}
         {isShow.type === 'edit' && <FormEdit data={formData} setData={setFormData} handler={handleEdit} />}

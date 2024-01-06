@@ -1,16 +1,14 @@
 import { Form, Row, Col, InputGroup } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { asyncLogin } from '../state/auth/middleware'
 
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-import ErrorMsg from '../components/ErrorMsg'
 
 import logo from '../assets/logo.png'
 import style from '../styles/pages/Login.module.css'
 
 export default function Login() {
-    const { error = { status: false } } = useSelector(states => states)
     const dispatch = useDispatch()
 
     const [formData, setFormData] = useState({ username: null, password: null })
@@ -29,13 +27,6 @@ export default function Login() {
         <main className={style.layout}>
             <section>
                 <img src={logo} alt="brand logo" width="80%" style={{ marginBottom: '40px' }} />
-                {/* Error Display */}
-                {error.status && (
-                    <div style={{ width: '70%' }}>
-                        <ErrorMsg title={error.message} />
-                    </div>
-                )}
-
                 <Form className={style.form_login} onSubmit={(e) => handleLogin(e)}>
                     <Row>
                         <Col>

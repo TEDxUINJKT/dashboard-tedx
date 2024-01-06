@@ -68,37 +68,43 @@ export default function Partner() {
             </IconContext.Provider>
           </button>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Organization</th>
-              <th>Version</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {partners.sponsor?.map((sponsor, index) => (
-              <tr key={`data ${index}`}>
-                <td>{index + 1}.</td>
-                <td>{sponsor.organization}</td>
-                <td>{sponsor.version}</td>
-                <td className="action_table">
-                  <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', group: 'sponsor', title: 'Edit Access' }); setFormData(sponsor); }}>
-                    <IconContext.Provider value={{ className: "icon" }}>
-                      <FiEdit />
-                    </IconContext.Provider>
-                  </div>
-                  <div className={style.delete_button} onClick={() => { setShow({ value: true, type: 'remove', group: 'sponsor', title: null }); setFormData(sponsor); }}>
-                    <IconContext.Provider value={{ className: "icon" }}>
-                      <RiDeleteBin6Line />
-                    </IconContext.Provider>
-                  </div>
-                </td>
+        {partners.sponsor.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Organization</th>
+                <th>Version</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {partners.sponsor?.map((sponsor, index) => (
+                <tr key={`data ${index}`}>
+                  <td>{index + 1}.</td>
+                  <td>{sponsor.organization}</td>
+                  <td>{sponsor.version}</td>
+                  <td className="action_table">
+                    <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', group: 'sponsor', title: 'Edit Access' }); setFormData(sponsor); }}>
+                      <IconContext.Provider value={{ className: "icon" }}>
+                        <FiEdit />
+                      </IconContext.Provider>
+                    </div>
+                    <div className={style.delete_button} onClick={() => { setShow({ value: true, type: 'remove', group: 'sponsor', title: null }); setFormData(sponsor); }}>
+                      <IconContext.Provider value={{ className: "icon" }}>
+                        <RiDeleteBin6Line />
+                      </IconContext.Provider>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <section className="centered">
+            <h5>No Item Found</h5>
+          </section>
+        )}
       </section>
 
       <section>
@@ -110,37 +116,43 @@ export default function Partner() {
             </IconContext.Provider>
           </button>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Organization</th>
-              <th>Version</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {partners.medpart?.map((medpart, index) => (
-              <tr key={`data ${index}`}>
-                <td>{index + 1}.</td>
-                <td>{medpart.organization}</td>
-                <td>{medpart.version}</td>
-                <td className="action_table">
-                  <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', group: 'medpart', title: 'Edit Access' }); setFormData(medpart); }}>
-                    <IconContext.Provider value={{ className: "icon" }}>
-                      <FiEdit />
-                    </IconContext.Provider>
-                  </div>
-                  <div className={style.delete_button} onClick={() => { setShow({ value: true, type: 'remove', group: 'medpart', title: null }); setFormData(medpart); }}>
-                    <IconContext.Provider value={{ className: "icon" }}>
-                      <RiDeleteBin6Line />
-                    </IconContext.Provider>
-                  </div>
-                </td>
+        {partners.medpart.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Organization</th>
+                <th>Version</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {partners.medpart?.map((medpart, index) => (
+                <tr key={`data ${index}`}>
+                  <td>{index + 1}.</td>
+                  <td>{medpart.organization}</td>
+                  <td>{medpart.version}</td>
+                  <td className="action_table">
+                    <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', group: 'medpart', title: 'Edit Access' }); setFormData(medpart); }}>
+                      <IconContext.Provider value={{ className: "icon" }}>
+                        <FiEdit />
+                      </IconContext.Provider>
+                    </div>
+                    <div className={style.delete_button} onClick={() => { setShow({ value: true, type: 'remove', group: 'medpart', title: null }); setFormData(medpart); }}>
+                      <IconContext.Provider value={{ className: "icon" }}>
+                        <RiDeleteBin6Line />
+                      </IconContext.Provider>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <section className="centered">
+            <h5>No Item Found</h5>
+          </section>
+        )}
       </section>
       <Modal setShow={setShow} isShow={isShow} >
         {isShow.type === 'add' && <FormCreate data={formData} setData={setFormData} handler={handleAdd} group={isShow.group} version={version} />}

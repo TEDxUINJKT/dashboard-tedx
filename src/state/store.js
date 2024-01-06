@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 
-import ErrorReducer from './error/reducer'
+import LoadingReducer from "./loading/reducer"
 import AuhtReducer from "./auth/reducer"
 import UsersReducer from "./users/reducer"
 import PartnersReducer from "./partners/reducer"
@@ -11,7 +11,7 @@ import ContentsReducer from "./contents/reducer"
 
 const store = configureStore({
     reducer: {
-        error: ErrorReducer,
+        loading: LoadingReducer,
         auth: AuhtReducer,
         users: UsersReducer,
         partners: PartnersReducer,

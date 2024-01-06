@@ -72,13 +72,13 @@ export default function EventDetail() {
 
   function handleEditTicket(event, data) {
     event.preventDefault()
-    dispatch(EditTicket(data))
+    dispatch(EditTicket(data, id))
     setShow({ value: false, type: null, title: null })
   }
 
-  function handleDeleteTicket(id = null) {
-    if (id !== null) {
-      dispatch(DeleteTicket(id))
+  function handleDeleteTicket(id_ticket = null) {
+    if (id_ticket !== null) {
+      dispatch(DeleteTicket(id_ticket, id))
     }
 
     setShow({ value: false, type: null, title: null })

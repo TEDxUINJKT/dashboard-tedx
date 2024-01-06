@@ -68,39 +68,45 @@ export default function Speaker() {
                         </IconContext.Provider>
                     </button>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Full Name</th>
-                            <th>Organization</th>
-                            <th className="hide_mobile">Version</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {speakers.main?.map((main, index) => (
-                            <tr key={`data ${index}`}>
-                                <td>{index + 1}.</td>
-                                <td>{main.full_name}</td>
-                                <td>{main.organization}</td>
-                                <td className="hide_mobile">{main.version}</td>
-                                <td className="action_table">
-                                    <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', group: 'main', title: 'Edit Access' }); setFormData(main); }}>
-                                        <IconContext.Provider value={{ className: "icon" }}>
-                                            <FiEdit />
-                                        </IconContext.Provider>
-                                    </div>
-                                    <div className={style.delete_button} onClick={() => { setShow({ value: true, type: 'remove', group: 'main', title: null }); setFormData(main); }}>
-                                        <IconContext.Provider value={{ className: "icon" }}>
-                                            <RiDeleteBin6Line />
-                                        </IconContext.Provider>
-                                    </div>
-                                </td>
+                {speakers.main.length > 0 ? (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Full Name</th>
+                                <th>Organization</th>
+                                <th className="hide_mobile">Version</th>
+                                <th>Action</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {speakers.main?.map((main, index) => (
+                                <tr key={`data ${index}`}>
+                                    <td>{index + 1}.</td>
+                                    <td>{main.full_name}</td>
+                                    <td>{main.organization}</td>
+                                    <td className="hide_mobile">{main.version}</td>
+                                    <td className="action_table">
+                                        <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', group: 'main', title: 'Edit Access' }); setFormData(main); }}>
+                                            <IconContext.Provider value={{ className: "icon" }}>
+                                                <FiEdit />
+                                            </IconContext.Provider>
+                                        </div>
+                                        <div className={style.delete_button} onClick={() => { setShow({ value: true, type: 'remove', group: 'main', title: null }); setFormData(main); }}>
+                                            <IconContext.Provider value={{ className: "icon" }}>
+                                                <RiDeleteBin6Line />
+                                            </IconContext.Provider>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <section className="centered">
+                        <h5>No Item Found</h5>
+                    </section>
+                )}
             </section>
 
             <section>
@@ -112,39 +118,45 @@ export default function Speaker() {
                         </IconContext.Provider>
                     </button>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Full Name</th>
-                            <th>Organization</th>
-                            <th className="hide_mobile">Version</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {speakers.student?.map((student, index) => (
-                            <tr key={`data ${index}`}>
-                                <td>{index + 1}.</td>
-                                <td>{student.full_name}</td>
-                                <td>{student.organization}</td>
-                                <td className="hide_mobile">{student.version}</td>
-                                <td className="action_table">
-                                    <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', group: 'student', title: 'Edit Access' }); setFormData(student); }}>
-                                        <IconContext.Provider value={{ className: "icon" }}>
-                                            <FiEdit />
-                                        </IconContext.Provider>
-                                    </div>
-                                    <div className={style.delete_button} onClick={() => { setShow({ value: true, type: 'remove', group: 'student', title: null }); setFormData(student); }}>
-                                        <IconContext.Provider value={{ className: "icon" }}>
-                                            <RiDeleteBin6Line />
-                                        </IconContext.Provider>
-                                    </div>
-                                </td>
+                {speakers.student.length > 0 ? (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Full Name</th>
+                                <th>Organization</th>
+                                <th className="hide_mobile">Version</th>
+                                <th>Action</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {speakers.student?.map((student, index) => (
+                                <tr key={`data ${index}`}>
+                                    <td>{index + 1}.</td>
+                                    <td>{student.full_name}</td>
+                                    <td>{student.organization}</td>
+                                    <td className="hide_mobile">{student.version}</td>
+                                    <td className="action_table">
+                                        <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', group: 'student', title: 'Edit Access' }); setFormData(student); }}>
+                                            <IconContext.Provider value={{ className: "icon" }}>
+                                                <FiEdit />
+                                            </IconContext.Provider>
+                                        </div>
+                                        <div className={style.delete_button} onClick={() => { setShow({ value: true, type: 'remove', group: 'student', title: null }); setFormData(student); }}>
+                                            <IconContext.Provider value={{ className: "icon" }}>
+                                                <RiDeleteBin6Line />
+                                            </IconContext.Provider>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <section className="centered">
+                        <h5>No Item Found</h5>
+                    </section>
+                )}
             </section>
             <Modal setShow={setShow} isShow={isShow} >
                 {isShow.type === 'add' && <FormCreate data={formData} setData={setFormData} handler={handleAdd} group={isShow.group} version={version} />}

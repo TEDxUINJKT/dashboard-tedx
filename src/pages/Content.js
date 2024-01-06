@@ -65,20 +65,25 @@ export default function Content() {
           </IconContext.Provider>
         </button>
       </div>
-      <section className={style.content_card_container}>
-        {contents.map((content, index) => (
-          <div className={style.content_card} key={`content ${index}`}>
-            <h5>{content.type}</h5>
-            {content?.data.image?.url ? (<img src={content?.data.image?.url} alt={content?.type} width="80%" />) : null}
-            {content?.data.link ? (<iframe src={content?.data.link} title="YouTube video player" />) : null}
-            <div className={style.content_cta}>
-              <button onClick={() => { setShow({ value: true, type: 'edit', title: "Edit Content" }); setFormData(content) }}>Edit</button>
-              <button onClick={() => { setShow({ value: true, type: 'remove', title: null }); setFormData(content) }}>Delete</button>
+      {contents.length > 0 ? (
+        <section className={style.content_card_container}>
+          {contents.map((content, index) => (
+            <div className={style.content_card} key={`content ${index}`}>
+              <h5>{content.type}</h5>
+              {content?.data.image?.url ? (<img src={content?.data.image?.url} alt={content?.type} width="80%" />) : null}
+              {content?.data.link ? (<iframe src={content?.data.link} title="YouTube video player" />) : null}
+              <div className={style.content_cta}>
+                <button onClick={() => { setShow({ value: true, type: 'edit', title: "Edit Content" }); setFormData(content) }}>Edit</button>
+                <button onClick={() => { setShow({ value: true, type: 'remove', title: null }); setFormData(content) }}>Delete</button>
+              </div>
             </div>
-          </div>
-        ))}
-
-      </section>
+          ))}
+        </section>
+      ) : (
+        <section className="centered">
+          <h5>No Item Found</h5>
+        </section>
+      )}
       <Modal setShow={setShow} isShow={isShow} >
         {isShow.type === 'add' && <FormCreate data={formData} setData={setFormData} handler={handleAdd} version={version} />}
         {isShow.type === 'edit' && <FormEdit data={formData} setData={setFormData} handler={handleEdit} version={version} />}

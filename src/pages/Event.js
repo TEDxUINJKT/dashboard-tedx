@@ -51,11 +51,17 @@ export default function Event() {
           </IconContext.Provider>
         </button>
       </div>
-      <section className={style.card_container}>
-        {events.map((event, index) => (
-          <EventCard data={event} key={`card ${index}`} />
-        ))}
-      </section>
+      {events.length > 0 ? (
+        <section className={style.card_container}>
+          {events.map((event, index) => (
+            <EventCard data={event} key={`card ${index}`} />
+          ))}
+        </section>
+      ) : (
+        <section className='centered'>
+          <h5>No Item Found</h5>
+        </section>
+      )}
       <Modal setShow={setShow} isShow={isShow} >
         {isShow.type === 'add' && <FormCreate data={formData} setData={setFormData} handler={handleAdd} version={version} />}
       </Modal>

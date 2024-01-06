@@ -1,63 +1,77 @@
 import api from "../../utils/api";
 
+import { StartLoadingActions, FetchLoadingActions, FinishLoadingActions } from '../loading/action'
+import { ShowSuccess, ShowError } from '../error/middleware'
+
 import { GetTicketsActions } from "./action";
 
-function GetTickets() {
+function GetTickets(id) {
     return async dispatch => {
+        dispatch(StartLoadingActions())
         try {
-            const response = await api.Get_Ticket_List();
+            dispatch(FetchLoadingActions())
+            const response = await api.Get_Ticket_List(id);
             dispatch(GetTicketsActions(response.data.tickets));
         } catch (err) {
-            console.error(err);
             dispatch(GetTicketsActions([]));
         }
+        dispatch(FinishLoadingActions())
     }
 }
 
-function AddTicket(payload) {
+function AddTicket(payload, event_id) {
     return async dispatch => {
+        dispatch(StartLoadingActions())
         try {
-            const response = await api.Add_Ticket(payload);
+            dispatch(FetchLoadingActions())
+            const response = await api.Add_Ticket(payload, event_id);
 
             if (response.info !== undefined) {
                 throw new Error()
             }
-            dispatch(GetTickets())
-
+            dispatch(GetTickets(event_id))
+            ShowSuccess('Success Add New Ticket')
         } catch (err) {
-            console.error(err);
+            ShowError('Failed Add New Ticket')
         }
+        dispatch(FinishLoadingActions())
     }
 }
 
-function EditTicket(payload) {
+function EditTicket(payload, event_id) {
     return async dispatch => {
+        dispatch(StartLoadingActions())
         try {
+            dispatch(FetchLoadingActions())
             const response = await api.Update_Ticket(payload);
 
             if (response.info !== undefined) {
                 throw new Error()
             }
-            dispatch(GetTickets())
-
+            dispatch(GetTickets(event_id))
+            ShowSuccess('Success Edit Ticket')
         } catch (err) {
-            console.error(err);
-            console.log('erorr')
+            ShowError('Failed Edit Ticket')
         }
+        dispatch(FinishLoadingActions())
     }
 }
 
-function DeleteTicket(id) {
+function DeleteTicket(id, event_id) {
     return async dispatch => {
+        dispatch(StartLoadingActions())
         try {
+            dispatch(FetchLoadingActions())
             const response = await api.Delete_Ticket(id);
             if (response.info !== undefined) {
                 throw new Error()
             }
-            dispatch(GetTickets())
+            dispatch(GetTickets(event_id))
+            ShowSuccess('Success Delete Ticket')
         } catch (err) {
-            console.error(err);
+            ShowError('Failed Delete Ticket')
         }
+        dispatch(FinishLoadingActions())
     }
 }
 
