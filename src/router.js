@@ -57,18 +57,43 @@ export default function AppRouter() {
                     <Route path="*" element={<Page404 />} />
                 </Routes>
             ) : (
-                <SidebarContext.Provider value={value}>
-                    <Layout>
+                    <SidebarContext.Provider value={value}>
+                        <Layout>
+                    {auth.role? === 'Sysadmin' ?? (
+                            <Routes>
+                                <Route exact path="/" element={<Home />} />
+                                <Route path="/event" element={<Event />} />
+                                <Route path="/event/manage/:id" element={<EventDetail />} />
+                                <Route path="/partner" element={<Partner />} />
+                                <Route path="/content" element={<Content />} />
+                                <Route path="/access" element={<Access />} />
+                                <Route path="/speaker" element={<Speaker />} />
+                                <Route path="*" element={<Page404 />} />
+                            </Routes>
+                    )}
+                    {auth.role? === 'Communication' ?? (
+                        <Routes>
+                            <Route exact path="/" element={<Home />} />
+                            <Route path="/content" element={<Content />} />
+                            <Route path="*" element={<Page404 />} />
+                        </Routes>
+                    )}
+                    {auth.role? === 'Event' ?? (
                         <Routes>
                             <Route exact path="/" element={<Home />} />
                             <Route path="/event" element={<Event />} />
                             <Route path="/event/manage/:id" element={<EventDetail />} />
-                            <Route path="/partner" element={<Partner />} />
-                            <Route path="/content" element={<Content />} />
-                            <Route path="/access" element={<Access />} />
                             <Route path="/speaker" element={<Speaker />} />
                             <Route path="*" element={<Page404 />} />
                         </Routes>
+                    )}
+                    {auth.role? === 'Partnership' ?? (
+                        <Routes>
+                            <Route exact path="/" element={<Home />} />
+                            <Route path="/content" element={<Content />} />
+                            <Route path="*" element={<Page404 />} />
+                        </Routes>
+                    )}
                     </Layout>
                 </SidebarContext.Provider>
             )}
