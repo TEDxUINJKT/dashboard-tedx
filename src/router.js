@@ -59,7 +59,7 @@ export default function AppRouter() {
             ) : (
                 <SidebarContext.Provider value={value}>
                     <Layout>
-                        {auth.role === 'Sysadmin' ?? (
+                        {auth.role === 'Sysadmin' && (
                             <Routes>
                                 <Route exact path="/" element={<Home />} />
                                 <Route path="/event" element={<Event />} />
@@ -71,14 +71,14 @@ export default function AppRouter() {
                                 <Route path="*" element={<Page404 />} />
                             </Routes>
                         )}
-                        {auth.role === 'Communication' ?? (
+                        {auth.role === 'Communication' && (
                             <Routes>
                                 <Route exact path="/" element={<Home />} />
                                 <Route path="/content" element={<Content />} />
                                 <Route path="*" element={<Page404 />} />
                             </Routes>
                         )}
-                        {auth.role === 'Event' ?? (
+                        {auth.role === 'Event' && (
                             <Routes>
                                 <Route exact path="/" element={<Home />} />
                                 <Route path="/event" element={<Event />} />
@@ -87,7 +87,7 @@ export default function AppRouter() {
                                 <Route path="*" element={<Page404 />} />
                             </Routes>
                         )}
-                        {auth.role === 'Partnership' ?? (
+                        {auth.role === 'Partnership' && (
                             <Routes>
                                 <Route exact path="/" element={<Home />} />
                                 <Route path="/content" element={<Content />} />
