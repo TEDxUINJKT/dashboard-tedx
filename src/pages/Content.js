@@ -24,12 +24,14 @@ export default function Content() {
   function handleAdd(event, data) {
     event.preventDefault()
     dispatch(AddContent(data))
+    console.log(data)
     setShow({ value: false, type: null, title: null })
   }
 
   function handleEdit(event, data) {
     event.preventDefault()
     dispatch(EditContent(data))
+    console.log(data)
     setShow({ value: false, type: null, title: null })
   }
 
@@ -157,7 +159,7 @@ function FormAds({ data, setData, version }) {
       <Row>
         <Col className="col-12 my-2">
           <Form.Group>
-            <Form.Control placeholder="Iframe URL" value={data.data.link} onChange={(e) => setData({ ...data, data: { ...data.data, link: e.target.value } })} type="text" />
+            <Form.Control placeholder="Iframe URL" value={data.data.link} onChange={(e) => setData({ ...data, data: { ...data.data, link: e.target.value }, version })} type="text" />
           </Form.Group>
         </Col>
       </Row>
@@ -221,7 +223,7 @@ function FormEdit({ data, setData, handler, version }) {
       {data.type === 'ads' ? <FormAds data={data} setData={setData} version={version} /> : null}
       <Row >
         <Col className="righted mt-3">
-          <button type="submit">Add</button>
+          <button type="submit">Edit</button>
         </Col>
       </Row>
     </Form>
