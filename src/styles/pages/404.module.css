@@ -1,0 +1,18 @@
+.layout {
+    min-height: 500px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.layout h1 {
+    font-family: 'Monument Extended';
+    font-size: 7em;
+    line-height: .5em;
+}
+
+.layout p {
+    font-size: 3em;
+}

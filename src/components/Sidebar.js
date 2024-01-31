@@ -48,46 +48,90 @@ export default function Sidebar() {
                         Home
                     </Link>
                 </li>
-                <li className={pathname.includes('/event') ? style.active : null} onClick={() => setShow(!show)}>
-                    <Link to="/event">
-                        <IconContext.Provider value={{ className: "icon" }}>
-                            <MdEventNote />
-                        </IconContext.Provider>
-                        Event
-                    </Link>
-                </li>
-                <li className={pathname === '/partner' ? style.active : null} onClick={() => setShow(!show)}>
-                    <Link to="/partner">
-                        <IconContext.Provider value={{ className: "icon" }}>
-                            <TbCirclesRelation />
-                        </IconContext.Provider>
-                        Partner
-                    </Link>
-                </li>
-                <li className={pathname === '/speaker' ? style.active : null} onClick={() => setShow(!show)}>
-                    <Link to="/speaker">
-                        <IconContext.Provider value={{ className: "icon" }}>
-                            <PiMicrophoneStageBold />
-                        </IconContext.Provider>
-                        Speaker
-                    </Link>
-                </li>
-                <li className={pathname === '/content' ? style.active : null} onClick={() => setShow(!show)}>
-                    <Link to="/content">
-                        <IconContext.Provider value={{ className: "icon" }}>
-                            <BiBookContent />
-                        </IconContext.Provider>
-                        Content
-                    </Link>
-                </li>
-                <li className={pathname === '/access' ? style.active : null} onClick={() => setShow(!show)}>
-                    <Link to="/access">
-                        <IconContext.Provider value={{ className: "icon" }}>
-                            <RiNodeTree />
-                        </IconContext.Provider>
-                        Access
-                    </Link>
-                </li>
+                {auth.role === 'Sysadmin' && (
+                    <>
+                        <li className={pathname.includes('/event') ? style.active : null} onClick={() => setShow(!show)}>
+                            <Link to="/event">
+                                <IconContext.Provider value={{ className: "icon" }}>
+                                    <MdEventNote />
+                                </IconContext.Provider>
+                                Event
+                            </Link>
+                        </li>
+                        <li className={pathname === '/partner' ? style.active : null} onClick={() => setShow(!show)}>
+                            <Link to="/partner">
+                                <IconContext.Provider value={{ className: "icon" }}>
+                                    <TbCirclesRelation />
+                                </IconContext.Provider>
+                                Partner
+                            </Link>
+                        </li>
+                        <li className={pathname === '/speaker' ? style.active : null} onClick={() => setShow(!show)}>
+                            <Link to="/speaker">
+                                <IconContext.Provider value={{ className: "icon" }}>
+                                    <PiMicrophoneStageBold />
+                                </IconContext.Provider>
+                                Speaker
+                            </Link>
+                        </li>
+                        <li className={pathname === '/content' ? style.active : null} onClick={() => setShow(!show)}>
+                            <Link to="/content">
+                                <IconContext.Provider value={{ className: "icon" }}>
+                                    <BiBookContent />
+                                </IconContext.Provider>
+                                Content
+                            </Link>
+                        </li>
+                        <li className={pathname === '/access' ? style.active : null} onClick={() => setShow(!show)}>
+                            <Link to="/access">
+                                <IconContext.Provider value={{ className: "icon" }}>
+                                    <RiNodeTree />
+                                </IconContext.Provider>
+                                Access
+                            </Link>
+                        </li>
+                    </>
+                )}
+                {auth.role === 'Communication' && (
+                    <li className={pathname === '/content' ? style.active : null} onClick={() => setShow(!show)}>
+                        <Link to="/content">
+                            <IconContext.Provider value={{ className: "icon" }}>
+                                <BiBookContent />
+                            </IconContext.Provider>
+                            Content
+                        </Link>
+                    </li>
+                )}
+                {auth.role === 'Event' && (
+                    <>
+                        <li className={pathname === '/speaker' ? style.active : null} onClick={() => setShow(!show)}>
+                            <Link to="/speaker">
+                                <IconContext.Provider value={{ className: "icon" }}>
+                                    <PiMicrophoneStageBold />
+                                </IconContext.Provider>
+                                Speaker
+                            </Link>
+                        </li>
+                        <li className={pathname.includes('/event') ? style.active : null} onClick={() => setShow(!show)}>
+                            <Link to="/event">
+                                <IconContext.Provider value={{ className: "icon" }}>
+                                    <MdEventNote />
+                                </IconContext.Provider>
+                                Event
+                            </Link>
+                        </li>
+                    </>
+                )}
+                {auth.role === 'Partnership' && (
+                    <li className={pathname === '/partner' ? style.active : null} onClick={() => setShow(!show)}>
+                        <Link to="/partner">
+                            <IconContext.Provider value={{ className: "icon" }}>
+                                <TbCirclesRelation />
+                            </IconContext.Provider>
+                            Partner
+                        </Link>
+                    </li>
+                )}
             </ul>
             <div className={style.profile}>
                 <div className={style.profile_detail}>

@@ -90,7 +90,7 @@ export default function AppRouter() {
                         {auth.role === 'Partnership' && (
                             <Routes>
                                 <Route exact path="/" element={<Home />} />
-                                <Route path="/content" element={<Content />} />
+                                <Route path="/partner" element={<Partner />} />
                                 <Route path="*" element={<Page404 />} />
                             </Routes>
                         )}
