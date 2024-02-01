@@ -156,13 +156,13 @@ function FormAds({ data, setData, version }) {
   }
   return (
     <>
-      <Row>
+      {/* <Row>
         <Col className="col-12 my-2">
           <Form.Group>
             <Form.Control placeholder="Iframe URL" value={data.data.link} onChange={(e) => setData({ ...data, data: { ...data.data, link: e.target.value }, version })} type="text" />
           </Form.Group>
         </Col>
-      </Row>
+      </Row> */}
       <Row>
         <Col className="mt-3">
           <InputImage getData={getImage} currentData={data.data.image} />
@@ -207,7 +207,7 @@ function FormEdit({ data, setData, handler, version }) {
       <Row>
         <Col className="col-12 my-2">
           <Form.Group>
-            <Form.Select defaultValue="teaser" placeholder="Type" value={data.type} onChange={(e) => setData({ ...data, type: e.target.value })} type="text" required>
+            <Form.Select defaultValue="teaser" placeholder="Type" value={data.type} onChange={(e) => setData({ ...data, type: e.target.value })} type="text" disabled>
               <option value="theme">Theme</option>
               <option value="banner">Banner</option>
               <option value="teaser">Teaser</option>

@@ -288,7 +288,7 @@ function FormAddTicket({ data, setData, handler }) {
         </Col>
         <Col className="col-sm-6 col-12 my-2">
           <Form.Group>
-            <Form.Control placeholder="Ticket Order Link" value={data.order_link} onChange={(e) => setData({ ...data, order_link: e.target.value })} type="text" required />
+            <Form.Control placeholder="YesPlis Link" value={data.order_link} onChange={(e) => setData({ ...data, order_link: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
       </Row>
@@ -334,7 +334,7 @@ function FormEditTicket({ data, setData, handler }) {
         </Col>
         <Col className="col-sm-6 col-12 my-2">
           <Form.Group>
-            <Form.Control placeholder="Ticket Order Link" value={data.order_link} onChange={(e) => setData({ ...data, order_link: e.target.value })} type="text" required />
+            <Form.Control placeholder="YesPlis Link" value={data.order_link} onChange={(e) => setData({ ...data, order_link: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
       </Row>

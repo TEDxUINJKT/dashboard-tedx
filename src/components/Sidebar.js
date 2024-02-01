@@ -104,20 +104,20 @@ export default function Sidebar() {
                 )}
                 {auth.role === 'Event' && (
                     <>
-                        <li className={pathname === '/speaker' ? style.active : null} onClick={() => setShow(!show)}>
-                            <Link to="/speaker">
-                                <IconContext.Provider value={{ className: "icon" }}>
-                                    <PiMicrophoneStageBold />
-                                </IconContext.Provider>
-                                Speaker
-                            </Link>
-                        </li>
                         <li className={pathname.includes('/event') ? style.active : null} onClick={() => setShow(!show)}>
                             <Link to="/event">
                                 <IconContext.Provider value={{ className: "icon" }}>
                                     <MdEventNote />
                                 </IconContext.Provider>
                                 Event
+                            </Link>
+                        </li>
+                        <li className={pathname === '/speaker' ? style.active : null} onClick={() => setShow(!show)}>
+                            <Link to="/speaker">
+                                <IconContext.Provider value={{ className: "icon" }}>
+                                    <PiMicrophoneStageBold />
+                                </IconContext.Provider>
+                                Speaker
                             </Link>
                         </li>
                     </>
