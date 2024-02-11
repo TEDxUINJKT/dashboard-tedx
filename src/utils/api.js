@@ -236,8 +236,8 @@ export default (() => {
             type_ticket: data.type_ticket,
             description: data.description,
             price: data.price,
-            order_link: data.order_link,
-            status: data.status
+            status: data.status,
+            refferal: data.refferal
         }
 
         const response = await axios.post(url, payload)
@@ -251,8 +251,8 @@ export default (() => {
             type_ticket: data.type_ticket,
             description: data.description,
             price: data.price,
-            order_link: data.order_link,
-            status: data.status
+            status: data.status,
+            refferal: data.refferal
         }
 
         const response = await axios.patch(url, payload)

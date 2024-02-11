@@ -23,7 +23,7 @@ import style from '../styles/pages/EventDetail.module.css'
 
 export default function EventDetail() {
   const plain = { event: 'No Title', description: 'Bunga Kosmos yang indah pun Pastinya sudah tahu aku Selalu melihat dari jauh Aku bagaikan sinar mentari Kenangan cinta pertamaku Yang sedih karena tak kau sadari Tapi keberadaanmu tak akan terlupa Lampu jalan pun menjadi merah Dan ku berhasil mengejar truknya Kau yang duduk di kursi penumpang Lambaikan tangan sambil menangis Bunga Kosmos yang indah pun Terlihat begitu kesepian Bergoyang-goyang di dalam hening Hanya menghantar musim berganti Kenangan warna merah muda Di pojokan hatiku ini Adalah senyum di wajahmu yang telah pergi Tapi keberadaanmu tak akan terlupa.', date: '1-1-1', time: '00:00', place: 'Surga', version: null, type: null, thumbnail: { url: dummy } }
-  const plainTicket = { type_ticket: null, description: null, price: null, order_link: null, status: 'Available' }
+  const plainTicket = { type_ticket: null, description: null, price: null, status: 'Available', refferal: [] }
 
   const { id } = useParams()
   const dispatch = useDispatch()
@@ -263,14 +263,43 @@ function ConfirmationRemove({ data, handler, version }) {
 }
 
 function FormAddTicket({ data, setData, handler }) {
+  function addNewRefferal() {
+    setData({
+      ...data, refferal: [...data.refferal, {
+        name: null,
+        value: null
+      }]
+    })
+  }
+
+  function handleRefferalInput(index, type, value) {
+    let list = data.refferal
+    list[index][type] = value
+
+    setData({
+      ...data, refferal: list
+    })
+  }
+
+  function handleRemoveRefferalInput(index) {
+    let list = data.refferal
+    list.splice(index, 1)
+
+    setData({
+      ...data, refferal: list
+    })
+  }
+
   return (
     <Form className={style.form_access} onSubmit={(event) => handler(event, data)}>
       <Row>
-        <Col className="col-sm-6 col-12 my-2">
+        <Col className="col-12 my-2">
           <Form.Group>
             <Form.Control placeholder="Type Ticket" value={data.type_ticket} onChange={(e) => setData({ ...data, type_ticket: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
+      </Row>
+      <Row>
         <Col className="col-sm-6 col-12 my-2">
           <Form.Group>
             <Form.Select defaultValue="Available" placeholder="Type" value={data.status} onChange={(e) => setData({ ...data, status: e.target.value })} type="text" required>
@@ -279,16 +308,9 @@ function FormAddTicket({ data, setData, handler }) {
             </Form.Select>
           </Form.Group>
         </Col>
-      </Row>
-      <Row>
         <Col className="col-sm-6 col-12 my-2">
           <Form.Group>
             <Form.Control placeholder="Ticket Price" value={data.price} onChange={(e) => setData({ ...data, price: e.target.value })} type="number" required />
-          </Form.Group>
-        </Col>
-        <Col className="col-sm-6 col-12 my-2">
-          <Form.Group>
-            <Form.Control placeholder="YesPlis Link" value={data.order_link} onChange={(e) => setData({ ...data, order_link: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
       </Row>
@@ -299,24 +321,84 @@ function FormAddTicket({ data, setData, handler }) {
           </Form.Group>
         </Col>
       </Row>
+      <div className={style.refferal_title}>
+        <h5 className="my-3">Refferal Code</h5>
+        <button className={style.show_pass_btn} type="button" onClick={() => addNewRefferal()}>
+          <IconContext.Provider value={{ className: "icon" }}>
+            <MdAdd />
+          </IconContext.Provider>
+        </button>
+      </div>
+      {data.refferal?.map((each, index) => (
+        <Row >
+          <Col className="col-md-6 col-6 my-2">
+            <Form.Group>
+              <Form.Control placeholder="Refferal Code" value={each.name} onChange={(e) => handleRefferalInput(index, 'name', e.target.value)} type="text" required />
+            </Form.Group>
+          </Col>
+          <Col className="col-md-5 col-5 my-2">
+            <Form.Group>
+              <Form.Control placeholder="Discount" value={each.value} onChange={(e) => handleRefferalInput(index, 'value', e.target.value)} type="number" required />
+            </Form.Group>
+          </Col>
+          <Col className="col-md-1 col-1 my-2">
+            <div className={style.delete_button} onClick={() => handleRemoveRefferalInput(index)} >
+              <IconContext.Provider value={{ className: "icon" }}>
+                <RiDeleteBin6Line />
+              </IconContext.Provider>
+            </div>
+          </Col>
+        </Row>
+      ))
+      }
       <Row >
         <Col className="righted mt-3">
           <button type="submit">Add</button>
         </Col>
       </Row>
-    </Form>
+    </Form >
   )
 }
 
 function FormEditTicket({ data, setData, handler }) {
+  function addNewRefferal() {
+    setData({
+      ...data, refferal: [...data.refferal, {
+        name: null,
+        value: null
+      }]
+    })
+  }
+
+  function handleRefferalInput(index, type, value) {
+    let list = data.refferal
+    list[index][type] = value
+
+    setData({
+      ...data, refferal: list
+    })
+  }
+
+  function handleRemoveRefferalInput(index) {
+    let list = data.refferal
+    list.splice(index, 1)
+
+    setData({
+      ...data, refferal: list
+    })
+  }
+
   return (
     <Form className={style.form_access} onSubmit={(event) => handler(event, data)}>
       <Row>
-        <Col className="col-sm-6 col-12 my-2">
+        <Col className="col-12 my-2">
           <Form.Group>
             <Form.Control placeholder="Type Ticket" value={data.type_ticket} onChange={(e) => setData({ ...data, type_ticket: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
+
+      </Row>
+      <Row>
         <Col className="col-sm-6 col-12 my-2">
           <Form.Group>
             <Form.Select defaultValue="Available" placeholder="Type" value={data.status} onChange={(e) => setData({ ...data, status: e.target.value })} type="text" required>
@@ -325,16 +407,9 @@ function FormEditTicket({ data, setData, handler }) {
             </Form.Select>
           </Form.Group>
         </Col>
-      </Row>
-      <Row>
         <Col className="col-sm-6 col-12 my-2">
           <Form.Group>
             <Form.Control placeholder="Ticket Price" value={data.price} onChange={(e) => setData({ ...data, price: e.target.value })} type="number" required />
-          </Form.Group>
-        </Col>
-        <Col className="col-sm-6 col-12 my-2">
-          <Form.Group>
-            <Form.Control placeholder="YesPlis Link" value={data.order_link} onChange={(e) => setData({ ...data, order_link: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
       </Row>
@@ -345,6 +420,36 @@ function FormEditTicket({ data, setData, handler }) {
           </Form.Group>
         </Col>
       </Row>
+      <div className={style.refferal_title}>
+        <h5 className="my-3">Refferal Code</h5>
+        <button className={style.show_pass_btn} type="button" onClick={() => addNewRefferal()}>
+          <IconContext.Provider value={{ className: "icon" }}>
+            <MdAdd />
+          </IconContext.Provider>
+        </button>
+      </div>
+      {data.refferal?.map((each, index) => (
+        <Row >
+          <Col className="col-md-6 col-6 my-2">
+            <Form.Group>
+              <Form.Control placeholder="Refferal Code" value={each.name} onChange={(e) => handleRefferalInput(index, 'name', e.target.value)} type="text" required />
+            </Form.Group>
+          </Col>
+          <Col className="col-md-5 col-5 my-2">
+            <Form.Group>
+              <Form.Control placeholder="Discount" value={each.value} onChange={(e) => handleRefferalInput(index, 'value', e.target.value)} type="number" required />
+            </Form.Group>
+          </Col>
+          <Col className="col-md-1 col-1 my-2">
+            <div className={style.delete_button} onClick={() => handleRemoveRefferalInput(index)} >
+              <IconContext.Provider value={{ className: "icon" }}>
+                <RiDeleteBin6Line />
+              </IconContext.Provider>
+            </div>
+          </Col>
+        </Row>
+      ))
+      }
       <Row >
         <Col className="righted mt-3">
           <button type="submit">Edit</button>

@@ -75,6 +75,9 @@
     font-size: 1.2em;
     cursor: pointer;
     transition: .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .delete_button {
@@ -97,4 +100,15 @@
     color: var(--yellow);
     background-color: transparent;
     border: 2px solid var(--yellow);
+}
+
+.refferal_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.refferal_title button {
+    padding: 8px 10px;
+    height: fit-content;
 }
