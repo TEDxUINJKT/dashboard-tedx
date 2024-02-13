@@ -319,6 +319,48 @@ export default (() => {
         return response
     }
 
+    async function Get_Order_List(event_id) {
+        const url = baseUrl + `/order/list/${event_id}`
+
+        const response = await axios.get(url)
+        return response
+    }
+
+    async function Check_Order(order_id) {
+        const url = baseUrl + `/order/check/${order_id}`
+
+        const response = await axios.get(url)
+        return response
+    }
+
+    async function Add_Order(payload) {
+        const url = baseUrl + `/order/db/${payload.ticket_id}`
+
+        const response = await axios.post(url, payload)
+        return response
+    }
+
+    async function Update_Order(payload) {
+        const url = baseUrl + `/order/db/${payload.order_id}`
+
+        const response = await axios.patch(url, payload)
+        return response
+    }
+
+    async function Guest_Attend(order_id) {
+        const url = baseUrl + `/order/attend/${order_id}`
+
+        const response = await axios.patch(url, {})
+        return response
+    }
+
+    async function Delete_Order(order_id) {
+        const url = baseUrl + `/order/db/${order_id}`
+
+        const response = await axios.delete(url)
+        return response
+    }
+
     return {
         Login,
         Refresh,
@@ -348,6 +390,12 @@ export default (() => {
         Get_Content_Version,
         Add_Content,
         Update_Content,
-        Delete_Content
+        Delete_Content,
+        Get_Order_List,
+        Check_Order,
+        Add_Order,
+        Update_Order,
+        Guest_Attend,
+        Delete_Order
     }
 })()

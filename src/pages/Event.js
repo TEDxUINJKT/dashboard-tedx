@@ -54,7 +54,7 @@ export default function Event() {
       {events.length > 0 ? (
         <section className={style.card_container}>
           {events.map((event, index) => (
-            <EventCard data={event} key={`card ${index}`} />
+            <EventCard data={event} key={`card ${index}`} type='event' />
           ))}
         </section>
       ) : (

@@ -13,6 +13,7 @@ import { TbCirclesRelation } from "react-icons/tb";
 import { BiBookContent } from "react-icons/bi";
 import { RiLogoutCircleRLine, RiNodeTree } from "react-icons/ri";
 import { IoArrowBackOutline } from "react-icons/io5";
+import { LuTicket } from "react-icons/lu";
 import { PiMicrophoneStageBold } from "react-icons/pi";
 
 import style from '../styles/components/Sidebar.module.css'
@@ -90,6 +91,14 @@ export default function Sidebar() {
                                 Access
                             </Link>
                         </li>
+                        <li className={pathname.includes('order') ? style.active : null} onClick={() => setShow(!show)}>
+                            <Link to="/order">
+                                <IconContext.Provider value={{ className: "icon" }}>
+                                    <LuTicket />
+                                </IconContext.Provider>
+                                Order
+                            </Link>
+                        </li>
                     </>
                 )}
                 {auth.role === 'Communication' && (
@@ -118,6 +127,14 @@ export default function Sidebar() {
                                     <PiMicrophoneStageBold />
                                 </IconContext.Provider>
                                 Speaker
+                            </Link>
+                        </li>
+                        <li className={pathname.includes('order') ? style.active : null} onClick={() => setShow(!show)}>
+                            <Link to="/order">
+                                <IconContext.Provider value={{ className: "icon" }}>
+                                    <LuTicket />
+                                </IconContext.Provider>
+                                Order
                             </Link>
                         </li>
                     </>

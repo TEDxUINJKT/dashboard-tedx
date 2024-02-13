@@ -8,7 +8,7 @@ import { datePrettier } from '../utils/dateConverter'
 
 import style from '../styles/components/EventCard.module.css'
 
-export default function EventCard({ data }) {
+export default function EventCard({ data, type }) {
     return (
         <div style={{ backgroundImage: `url(${data.thumbnail.url})` }} className={style.card}>
             <div className={style.content}>
@@ -36,9 +36,15 @@ export default function EventCard({ data }) {
                         {data.place}
                     </span>
                 </div>
-                <Link to={`/event/manage/${data._id}`}>
-                    <button>Manage</button>
-                </Link>
+                {type === 'event' ? (
+                    <Link to={`/event/manage/${data._id}`}>
+                        <button>Manage</button>
+                    </Link>
+                ) : (
+                    <Link to={`/order/${data._id}`}>
+                        <button>Manage</button>
+                    </Link>
+                )}
             </div>
         </div>
     )

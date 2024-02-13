@@ -1,0 +1,43 @@
+.header_layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5vh;
+}
+
+.header_layout button {
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+.delete_button,
+.edit_button {
+    color: white;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.delete_button {
+    background-color: var(--red);
+    border: 2px solid var(--red);
+}
+
+.edit_button {
+    background-color: var(--yellow);
+    border: 2px solid var(--yellow);
+}
+
+.delete_button:hover {
+    color: var(--red);
+    background-color: transparent;
+    border: 2px solid var(--red);
+}
+
+.edit_button:hover {
+    color: var(--yellow);
+    background-color: transparent;
+    border: 2px solid var(--yellow);
+}

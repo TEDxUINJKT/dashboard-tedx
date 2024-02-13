@@ -15,6 +15,8 @@ import Partner from './pages/Partner'
 import Speaker from './pages/Speaker'
 import Content from './pages/Content'
 import Access from './pages/Access'
+import Order from "./pages/Order";
+import OrderList from "./pages/OrderList";
 import Page404 from './pages/Page404'
 
 export default function AppRouter() {
@@ -68,6 +70,8 @@ export default function AppRouter() {
                                 <Route path="/content" element={<Content />} />
                                 <Route path="/access" element={<Access />} />
                                 <Route path="/speaker" element={<Speaker />} />
+                                <Route path="/order" element={<Order />} />
+                                <Route path="/order/:id" element={<OrderList />} />
                                 <Route path="*" element={<Page404 />} />
                             </Routes>
                         )}
@@ -83,6 +87,8 @@ export default function AppRouter() {
                                 <Route exact path="/" element={<Home />} />
                                 <Route path="/event" element={<Event />} />
                                 <Route path="/event/manage/:id" element={<EventDetail />} />
+                                <Route path="/order" element={<Order />} />
+                                <Route path="/order/:id" element={<OrderList />} />
                                 <Route path="/speaker" element={<Speaker />} />
                                 <Route path="*" element={<Page404 />} />
                             </Routes>
