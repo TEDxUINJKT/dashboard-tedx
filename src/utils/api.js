@@ -224,7 +224,7 @@ export default (() => {
     }
 
     async function Get_Ticket_List(event_id) {
-        const url = baseUrl + `/event/ticket/${event_id}`
+        const url = baseUrl + `/event/db/ticket/${event_id}`
         const response = await axios.get(url)
         return response
     }
@@ -237,7 +237,10 @@ export default (() => {
             description: data.description,
             price: data.price,
             status: data.status,
-            refferal: data.refferal
+            refferal: data.refferal,
+            bundle_status:data.bundle_status,
+            quota:data.quota,
+            is_publish:data.is_publish,
         }
 
         const response = await axios.post(url, payload)
@@ -252,7 +255,10 @@ export default (() => {
             description: data.description,
             price: data.price,
             status: data.status,
-            refferal: data.refferal
+            refferal: data.refferal,
+            bundle_status:data.bundle_status,
+            quota:data.quota,
+            is_publish:data.is_publish,
         }
 
         const response = await axios.patch(url, payload)

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Row, Col } from 'react-bootstrap'
+import { Form, Row, Col,InputGroup } from 'react-bootstrap'
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { GetEvents, EditEvent, DeleteEvent } from '../state/events/middleware'
@@ -23,7 +23,7 @@ import style from '../styles/pages/EventDetail.module.css'
 
 export default function EventDetail() {
   const plain = { event: 'No Title', description: 'Bunga Kosmos yang indah pun Pastinya sudah tahu aku Selalu melihat dari jauh Aku bagaikan sinar mentari Kenangan cinta pertamaku Yang sedih karena tak kau sadari Tapi keberadaanmu tak akan terlupa Lampu jalan pun menjadi merah Dan ku berhasil mengejar truknya Kau yang duduk di kursi penumpang Lambaikan tangan sambil menangis Bunga Kosmos yang indah pun Terlihat begitu kesepian Bergoyang-goyang di dalam hening Hanya menghantar musim berganti Kenangan warna merah muda Di pojokan hatiku ini Adalah senyum di wajahmu yang telah pergi Tapi keberadaanmu tak akan terlupa.', date: '1-1-1', time: '00:00', place: 'Surga', version: null, type: null, thumbnail: { url: dummy } }
-  const plainTicket = { type_ticket: null, description: null, price: null, status: 'Available', refferal: [] }
+  const plainTicket = { is_bundle:false,bundle_count:null,is_publish:true,quota:null,type_ticket: null, description: null, price: null, status: 'Available', refferal: [] }
 
   const { id } = useParams()
   const dispatch = useDispatch()
@@ -66,13 +66,13 @@ export default function EventDetail() {
 
   function handleAddTicket(event, data) {
     event.preventDefault()
-    dispatch(AddTicket(data, id))
+    dispatch(AddTicket({...data,bundle_status:{is_bundle:data.is_bundle,bundle_count:data.bundle_count}}, id))
     setShow({ value: false, type: null, title: null })
   }
 
   function handleEditTicket(event, data) {
     event.preventDefault()
-    dispatch(EditTicket(data, id))
+    dispatch(EditTicket({...data,bundle_status:{is_bundle:data.is_bundle,bundle_count:data.bundle_count}}, id))
     setShow({ value: false, type: null, title: null })
   }
 
@@ -161,7 +161,7 @@ export default function EventDetail() {
                 <td>{ticket.price}</td>
                 <td className="hide_mobile">{ticket.status}</td>
                 <td className="action_table">
-                  <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit ticket', title: 'Edit Ticket' }); setFormData(ticket); }}>
+                  <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit ticket', title: 'Edit Ticket' }); setFormData({...ticket, is_bundle: ticket.bundle_status.is_bundle, bundle_count: ticket.bundle_status.bundle_count}); }}>
                     <IconContext.Provider value={{ className: "icon" }}>
                       <FiEdit />
                     </IconContext.Provider>
@@ -290,17 +290,52 @@ function FormAddTicket({ data, setData, handler }) {
     })
   }
 
+  function isBundle(value){
+    if(value){
+      setData({
+        ...data,is_bundle:true,bundle_count:2
+      })
+    }else{
+      setData({
+        ...data,is_bundle:false,bundle_count:''
+      })
+    }
+  }
+
+  function isPublish(value){
+    setData({
+      ...data,is_publish:value
+    })
+  }
+
   return (
     <Form className={style.form_access} onSubmit={(event) => handler(event, data)}>
       <Row>
-        <Col className="col-12 my-2">
+        <Col className="col-sm-6 col-12 my-2">
+            <div className={style.form_checkbox_group}>
+              <input checked={data.is_bundle}  type="checkbox" onChange={()=>isBundle(!data.is_bundle)}/>
+              Is Bundle?
+            </div>
+        </Col>
+        <Col className="col-sm-6 col-12 my-2">
+            <div className={style.form_checkbox_group}>
+              <input checked={data.is_publish} type="checkbox" onChange={()=>isPublish(!data.is_publish)} />
+              Is Publish?
+            </div>        
+        </Col>
+      </Row>      
+      <Row>
+        <Col className="col-sm-6 col-12 my-2">
           <Form.Group>
             <Form.Control placeholder="Type Ticket" value={data.type_ticket} onChange={(e) => setData({ ...data, type_ticket: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
+        <Col className="col-sm-6 col-12 my-2">
+          <Form.Control placeholder="Bundle Count" type="number" onChange={(e) => setData({ ...data, bundle_count: e.target.value })} value={data.bundle_count} required={data.is_bundle} disabled={!data.is_bundle}/>
+        </Col>
       </Row>
       <Row>
-        <Col className="col-sm-6 col-12 my-2">
+        <Col className="col-sm-4 col-12 my-2">
           <Form.Group>
             <Form.Select defaultValue="Available" placeholder="Type" value={data.status} onChange={(e) => setData({ ...data, status: e.target.value })} type="text" required>
               <option value="Available">Available</option>
@@ -308,9 +343,14 @@ function FormAddTicket({ data, setData, handler }) {
             </Form.Select>
           </Form.Group>
         </Col>
-        <Col className="col-sm-6 col-12 my-2">
+        <Col className="col-sm-4 col-12 my-2">
           <Form.Group>
             <Form.Control placeholder="Ticket Price" value={data.price} onChange={(e) => setData({ ...data, price: e.target.value })} type="number" required />
+          </Form.Group>
+        </Col>
+        <Col className="col-sm-4 col-12 my-2">
+          <Form.Group>
+            <Form.Control placeholder="Quota" value={data.quota} onChange={(e) => setData({ ...data, quota: e.target.value })} type="number" required />
           </Form.Group>
         </Col>
       </Row>
@@ -388,18 +428,52 @@ function FormEditTicket({ data, setData, handler }) {
     })
   }
 
+  function isBundle(value){
+    if(value){
+      setData({
+        ...data,is_bundle:true,bundle_count:data.bundle_status.bundle_count
+      })
+    }else{
+      setData({
+        ...data,is_bundle:false,bundle_count: 1
+      })
+    }
+  }
+
+  function isPublish(value){
+    setData({
+      ...data,is_publish:value
+    })
+  }
+
   return (
     <Form className={style.form_access} onSubmit={(event) => handler(event, data)}>
       <Row>
-        <Col className="col-12 my-2">
+        <Col className="col-sm-6 col-12 my-2">
+            <div className={style.form_checkbox_group}>
+              <input checked={data.is_bundle} type="checkbox" onChange={()=>isBundle(!data.is_bundle)}/>
+              Is Bundle?
+            </div>
+        </Col>
+        <Col className="col-sm-6 col-12 my-2">
+            <div className={style.form_checkbox_group}>
+              <input checked={data.is_publish} type="checkbox" onChange={()=>isPublish(!data.is_publish)} />
+              Is Publish?
+            </div>        
+        </Col>
+      </Row>    
+      <Row>
+        <Col className="col-sm-6 col-12 my-2">
           <Form.Group>
             <Form.Control placeholder="Type Ticket" value={data.type_ticket} onChange={(e) => setData({ ...data, type_ticket: e.target.value })} type="text" required />
           </Form.Group>
         </Col>
-
+        <Col className="col-sm-6 col-12 my-2">
+          <Form.Control placeholder="Bundle Count" type="number" onChange={(e) => setData({ ...data, bundle_count: e.target.value })} value={data.bundle_count} required={data.is_bundle} disabled={!data.is_bundle}/>
+        </Col>
       </Row>
       <Row>
-        <Col className="col-sm-6 col-12 my-2">
+        <Col className="col-sm-4 col-12 my-2">
           <Form.Group>
             <Form.Select defaultValue="Available" placeholder="Type" value={data.status} onChange={(e) => setData({ ...data, status: e.target.value })} type="text" required>
               <option value="Available">Available</option>
@@ -407,9 +481,14 @@ function FormEditTicket({ data, setData, handler }) {
             </Form.Select>
           </Form.Group>
         </Col>
-        <Col className="col-sm-6 col-12 my-2">
+        <Col className="col-sm-4 col-12 my-2">
           <Form.Group>
             <Form.Control placeholder="Ticket Price" value={data.price} onChange={(e) => setData({ ...data, price: e.target.value })} type="number" required />
+          </Form.Group>
+        </Col>
+        <Col className="col-sm-4 col-12 my-2">
+          <Form.Group>
+            <Form.Control placeholder="Quota" value={data.quota} onChange={(e) => setData({ ...data, quota: e.target.value })} type="number" required />
           </Form.Group>
         </Col>
       </Row>
