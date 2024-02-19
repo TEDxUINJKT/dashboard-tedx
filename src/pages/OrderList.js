@@ -47,6 +47,8 @@ export default function OrderList() {
         dispatch(GetOrders(id))
     }, [dispatch, id])
 
+    console.log(orders)
+
     return (
         <section>
             <div className={style.header_layout}>
@@ -74,8 +76,8 @@ export default function OrderList() {
                             <tr key={`data ${index}`}>
                                 <td>{order._id}</td>
                                 <td>{order.full_name}</td>
-                                <td>{order?.refferal}</td>
-                                <td className="hide_mobile">{order.type}</td>
+                                <td>{order?.refferal || 'None'}</td>
+                                <td className="hide_mobile">{order.ticket_type}</td>
                                 <td>{order.status}</td>
                                 <td className="action_table">
                                     <div className={style.edit_button} onClick={() => { setShow({ value: true, type: 'edit', title: 'Edit Access' }); setFormData(order); }}>
