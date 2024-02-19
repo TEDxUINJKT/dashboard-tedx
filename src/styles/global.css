@@ -132,7 +132,8 @@ td {
 tr .action_table {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    gap: 5px;
+    justify-content: center;
 }
 
 tbody tr:nth-child(odd) {

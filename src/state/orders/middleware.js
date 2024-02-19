@@ -24,7 +24,7 @@ function AddOrder(payload) {
         dispatch(StartLoadingActions())
         try {
             dispatch(FetchLoadingActions())
-            const response = await api.AddOrder(payload);
+            const response = await api.Add_Order(payload);
 
             if (response.info !== undefined) {
                 throw new Error()
@@ -43,7 +43,7 @@ function EditOrder(payload) {
         dispatch(StartLoadingActions())
         try {
             dispatch(FetchLoadingActions())
-            const response = await api.UpdateOrder(payload);
+            const response = await api.Update_Order(payload);
 
             if (response.info !== undefined) {
                 throw new Error()
@@ -100,7 +100,7 @@ function DeleteOrder(id) {
         dispatch(StartLoadingActions())
         try {
             dispatch(FetchLoadingActions())
-            const response = await api.DeleteOrder(id);
+            const response = await api.Delete_Order(id);
             if (response.info !== undefined) {
                 throw new Error()
             }
@@ -113,4 +113,20 @@ function DeleteOrder(id) {
     }
 }
 
-export { GetOrders, AddOrder, EditOrder, CheckOrder, GuestAttend, DeleteOrder }
+function FilterOrder(event, value, id, filterFunction) {
+    return async dispatch => {
+        dispatch(StartLoadingActions());
+
+        if(value === '') {
+            dispatch(GetOrders(id));
+            return;
+        }
+
+        const filteredEvent = event.filter(item => filterFunction(item, value));
+
+        dispatch(GetOrderListActions(filteredEvent));
+        dispatch(FinishLoadingActions());
+    };
+}
+
+export { FilterOrder, GetOrders, AddOrder, EditOrder, CheckOrder, GuestAttend, DeleteOrder }

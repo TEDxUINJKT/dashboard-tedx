@@ -20,6 +20,24 @@
     transition: .2s;
 }
 
+.details_button {
+    display: flex;
+    flex-shrink: 0;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: .2s;
+    border: 2px solid green;
+}
+
+.details_button:hover{
+    color: green;
+    background-color: transparent;
+}
+
 .delete_button {
     background-color: var(--red);
     border: 2px solid var(--red);
@@ -40,4 +58,12 @@
     color: var(--yellow);
     background-color: transparent;
     border: 2px solid var(--yellow);
+}
+
+.filtering_layout {
+    margin-bottom: 25px;
+}
+
+.filtering_layout button {
+    padding: 10px !important;
 }

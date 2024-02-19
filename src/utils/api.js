@@ -340,16 +340,26 @@ export default (() => {
     }
 
     async function Add_Order(payload) {
-        const url = baseUrl + `/order/db/${payload.ticket_id}`
-
-        const response = await axios.post(url, payload)
+        const { ticket_id, ...data } = payload;
+        const url = baseUrl + `/order/db/${ticket_id}`
+        const response = await axios.post(url, data)
         return response
     }
 
     async function Update_Order(payload) {
-        const url = baseUrl + `/order/db/${payload.order_id}`
+        const updatedData = {
+            full_name: payload.full_name,
+            email: payload.email,
+            phone_number: payload.phone_number,
+            university: payload.university,
+            status: payload.status,
+            event_id: payload.event_id,
+            event_name: payload.event_name,
+            user_id: payload.user_id,
+        }
+        const url = baseUrl + `/order/db/${payload.ticket_id}`
 
-        const response = await axios.patch(url, payload)
+        const response = await axios.patch(url, updatedData)
         return response
     }
 

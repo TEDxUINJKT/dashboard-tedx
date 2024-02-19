@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Form, Row, Col } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 
 import { GetEvents } from '../state/events/middleware'
 import EventCard from "../components/EventCard";

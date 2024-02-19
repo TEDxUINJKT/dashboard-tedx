@@ -13,12 +13,12 @@ function asyncLogin(username, password) {
             dispatch(FetchLoadingActions())
             // Fetch Login
             const response = await api.Login(username, password)
-
             //Setup Cookies 
             cookies.remove('access_token')
             cookies.add('access_token', response.data.access_token, 7)
 
             const data = {
+                id: response.data.id,
                 display_name: response.data.display_name,
                 role: response.data.role,
                 token: response.data.access_token,
