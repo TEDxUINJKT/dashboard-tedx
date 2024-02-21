@@ -335,7 +335,7 @@ export default (() => {
     async function Check_Order(order_id) {
         const url = baseUrl + `/order/check/${order_id}`
 
-        const response = await axios.get(url)
+        const response = await axios.patch(url)
         return response
     }
 
@@ -347,26 +347,10 @@ export default (() => {
     }
 
     async function Update_Order(payload) {
-        const updatedData = {
-            full_name: payload.full_name,
-            email: payload.email,
-            phone_number: payload.phone_number,
-            university: payload.university,
-            status: payload.status,
-            event_id: payload.event_id,
-            event_name: payload.event_name,
-            user_id: payload.user_id,
-        }
+        const { ticket_id, ...data } = payload;
         const url = baseUrl + `/order/db/${payload.ticket_id}`
 
-        const response = await axios.patch(url, updatedData)
-        return response
-    }
-
-    async function Guest_Attend(order_id) {
-        const url = baseUrl + `/order/attend/${order_id}`
-
-        const response = await axios.patch(url, {})
+        const response = await axios.patch(url, data)
         return response
     }
 
@@ -411,7 +395,6 @@ export default (() => {
         Check_Order,
         Add_Order,
         Update_Order,
-        Guest_Attend,
         Delete_Order
     }
 })()

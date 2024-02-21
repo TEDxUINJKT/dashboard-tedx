@@ -16,3 +16,10 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.qr{
+    border: 5px solid var(--red);
+    border-radius: 18px;
+    width: 500px;
+    height: 100%;
+}

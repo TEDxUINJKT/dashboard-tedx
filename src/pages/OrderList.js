@@ -32,17 +32,16 @@ export default function OrderList() {
 
     function handleAdd(event, data) {
         event.preventDefault()
-        const order_data = {...data, event_id: id, event_name: orders[0].event_name, user_id: auth.id};
 
+        const order_data = {...data, event_id: id, event_name: orders[0].event_name, user_id: auth.id};
         dispatch(AddOrder(order_data));
         setShow({ value: false, type: null, title: null })
     }
 
     function handleEdit(event, data) {
         event.preventDefault()
-        const edit_order_data = {...data, event_id: id, event_name: orders[0].event_name, user_id: auth.id};
 
-        dispatch(EditOrder(edit_order_data))
+        dispatch(EditOrder(data))
         setShow({ value: false, type: null, title: null })
     }
 
@@ -127,7 +126,13 @@ export default function OrderList() {
 function Search({ filterBy, setFilterBy, value, setValue, orders, id }) {
     const dispatch = useDispatch();
     const generateFilterFunction = (property) => (item, filterValue) => {
-        return item[property].toLowerCase().includes(filterValue.toLowerCase());
+        if (typeof item[property] === 'boolean') {
+            return item[property] === (filterValue === 'attended' ? true : false);
+        } else if (typeof item[property] === 'string') {
+            return item[property].toLowerCase().includes(filterValue.toLowerCase());
+        } else {
+            return false;
+        }
     };
 
     const filterFunctions = {
@@ -135,6 +140,7 @@ function Search({ filterBy, setFilterBy, value, setValue, orders, id }) {
         'Order ID': generateFilterFunction('_id'),
         'University': generateFilterFunction('university'),
         'Status': generateFilterFunction('status'),
+        'Attended': generateFilterFunction('attend_status'),
     }
 
     useEffect(() => {
@@ -152,7 +158,8 @@ function Search({ filterBy, setFilterBy, value, setValue, orders, id }) {
                         <option value="Order ID">Order ID</option>
                         <option value="Guest Name">Guest Name</option>
                         <option value="University">University</option>
-                        <option value="Status">Status</option>
+                        <option value="Status">Payment Status</option>
+                        <option value="Attended">Attend Status</option>
                     </Form.Select>
                 </Form.Group>
                 </Col>
@@ -173,6 +180,12 @@ function Search({ filterBy, setFilterBy, value, setValue, orders, id }) {
                                 <>
                                     <option value="Early Bird">Early Bird</option>
                                     <option value="Couple">Couple</option>
+                                </>
+                            )}
+                            {filterBy === 'Attended' && (
+                                <>
+                                    <option value={'attended'}>Attended</option>
+                                    <option value={'not attended'}>Not Attended</option>
                                 </>
                             )}
                         </Form.Select>
@@ -273,7 +286,7 @@ function FormCreate({ data, setData, handler, tickets }) {
                         value={data.ticket_id} 
                         onChange={(e) => {
                             const selectedTicket = tickets.find(ticket => ticket._id === e.target.value);
-                            setData({ ...data, ticket_id: selectedTicket ? selectedTicket._id : '', type_ticket: selectedTicket ? selectedTicket.type_ticket : '' });
+                            setData({ ...data, ticket_id: selectedTicket ? selectedTicket._id : '', ticket_type: selectedTicket ? selectedTicket.type_ticket : '' });
                         }} 
                         type="text" 
                         required
