@@ -64,16 +64,14 @@ function CheckOrder(id) {
             dispatch(FetchLoadingActions())
             const response = await api.Check_Order(id);
 
-            if (response.info !== undefined) {
-                throw new Error()
-            }
-
             if (response.status === 200) {
                 ShowSuccess('Order Valid')
                 return response.data.data;
+            } else if (response.status === 203){
+                ShowError(response.data.info);
+                return;
             }
 
-            ShowError(response.info);
         } catch (err) {
             ShowError('Order Not Valid')
         }

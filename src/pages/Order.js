@@ -73,9 +73,9 @@ function TicketCheck() {
         if (data && scanningEnabled) {
             setTicketData({});
             setScanningEnabled(false);
-            const result = dispatch(CheckOrder(data.text))
-                .then(() => {
-                    const { ticket_id, full_name, type_ticket, event_name, attend_status, quantity } = result
+            dispatch(CheckOrder(data.text))
+                .then((response) => {
+                    const { ticket_id, full_name, type_ticket, event_name, attend_status, quantity } = response
                     setTicketData({
                         ticket_id: ticket_id,
                         full_name: full_name,
@@ -96,7 +96,7 @@ function TicketCheck() {
         <span>-Please Scan Your Ticket Using QR Code-</span>
         <QrReader
                 className={style.qr}
-                delay={2000}
+                delay={10}
                 onScan={handleScanQr}
                 onError={(error) => {
                     console.error(error);
