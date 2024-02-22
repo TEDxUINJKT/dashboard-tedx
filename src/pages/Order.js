@@ -102,7 +102,10 @@ function TicketCheck() {
                     console.error(error);
                     setScanningEnabled(true);
                 }}
-                facingMode={cameraView}   
+                // facingMode={cameraView}
+                constraints={{
+                    video: { facingMode: "environment" }
+                  }}
             />
             <button className={style.set_camera_button} onClick={() => setCameraView(cameraView === 'front' ? 'back' : 'front')}>
                 View {cameraView === 'front' ? 'Back' : 'Front'}
