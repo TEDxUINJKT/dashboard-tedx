@@ -347,8 +347,8 @@ export default (() => {
     }
 
     async function Update_Order(payload) {
-        const { ticket_id, ...data } = payload;
-        const url = baseUrl + `/order/db/${payload.ticket_id}`
+        const { _id, ...data } = payload;
+        const url = baseUrl + `/order/db/${_id}`
 
         const response = await axios.patch(url, data)
         return response

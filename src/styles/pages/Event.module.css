@@ -23,3 +23,22 @@
     width: 500px;
     height: 100%;
 }
+
+.set_camera_button{
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+    padding: 7px 15px !important;
+    gap: 7px;
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .qr{
+        width: 100%;
+    }
+    .set_camera_button{
+        display: flex;
+        font-size: 0.95em;
+    }
+}

@@ -57,7 +57,6 @@ export default function OrderList() {
         dispatch(GetOrders(id))
         dispatch(GetTickets(id))
     }, [dispatch, id])
-
     return (
         <section>
             <div className={style.header_layout}>

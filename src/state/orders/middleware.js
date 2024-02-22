@@ -48,7 +48,7 @@ function EditOrder(payload) {
             if (response.info !== undefined) {
                 throw new Error()
             }
-            dispatch(GetOrders())
+            dispatch(GetOrders(payload.event_id))
             ShowSuccess('Success Edit Order')
         } catch (err) {
             ShowError('Failed Edit Order')
@@ -67,14 +67,19 @@ function CheckOrder(id) {
             if (response.info !== undefined) {
                 throw new Error()
             }
-            ShowSuccess('Order Valid')
+
+            if (response.status === 200) {
+                ShowSuccess('Order Valid')
+                return response.data.data;
+            }
+
+            ShowError(response.info);
         } catch (err) {
             ShowError('Order Not Valid')
         }
         dispatch(FinishLoadingActions())
     }
 }
-
 
 function GuestAttend(id) {
     return async dispatch => {

@@ -8,6 +8,7 @@ import EventCard from "../components/EventCard";
 
 import { IconContext } from "react-icons";
 import { MdOutlineQrCodeScanner } from "react-icons/md";
+import { BsCamera } from "react-icons/bs";
 
 import Modal from '../components/Modal'
 import QrReader from 'react-qr-scanner';
@@ -66,23 +67,24 @@ export default function Order() {
 function TicketCheck() {
     const [ticketData, setTicketData] = useState(null)
     const [scanningEnabled, setScanningEnabled] = useState(true);
+    const [cameraView, setCameraView] = useState('front');
     const dispatch = useDispatch()
     const handleScanQr = (data) => {
         if (data && scanningEnabled) {
             setTicketData({});
             setScanningEnabled(false);
-            dispatch(CheckOrder(data.text))
+            const result = dispatch(CheckOrder(data.text))
                 .then(() => {
-                    setScanningEnabled(true);
-                    /* setTicketData(data) Dummy */
+                    const { ticket_id, full_name, type_ticket, event_name, attend_status, quantity } = result
                     setTicketData({
-                        ticket_id: '123',
-                        full_name: 'Wildan Nur Rahman',
-                        type_ticket: 'Couple Sale',
-                        event_name: 'Tedx Indonesia 2022',
-                        attend_status: true,
-                        quantity: 1
+                        ticket_id: ticket_id,
+                        full_name: full_name,
+                        type_ticket: type_ticket,
+                        event_name: event_name,
+                        attend_status: attend_status,
+                        quantity: quantity,
                     })
+                    setScanningEnabled(true);
                 })
                 .catch(() => {
                     setScanningEnabled(true);
@@ -99,28 +101,35 @@ function TicketCheck() {
                 onError={(error) => {
                     console.error(error);
                     setScanningEnabled(true);
-                }}   
+                }}
+                facingMode={cameraView}   
             />
+            <button className={style.set_camera_button} onClick={() => setCameraView(cameraView === 'front' ? 'back' : 'front')}>
+                View {cameraView === 'front' ? 'Back' : 'Front'}
+                <IconContext.Provider value={{ className: "icon" }}>
+                    <BsCamera />
+                </IconContext.Provider>
+            </button>
         <div className="w-100">
-            <table className="mt-5">
+            <table className="mt-3">
                 <thead>
                     <tr>
-                        <th>Order ID</th>
+                        <th className="hide_mobile">Order ID</th>
                         <th>Full Name</th>
-                        <th>Type Ticket</th>
-                        <th>Event Name</th>
-                        <th>Qty</th>
+                        <th className="hide_mobile">Type Ticket</th>
+                        <th className="hide_mobile">Event Name</th>
+                        <th className="hide_mobile">Qty</th>
                         <th>Attend Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {ticketData?.ticket_id && (
                         <tr>
-                            <td>{ticketData.ticket_id}</td>
+                            <td className="hide_mobile">{ticketData.ticket_id}</td>
                             <td>{ticketData.full_name}</td>
-                            <td>{ticketData.type_ticket}</td>
-                            <td>{ticketData.event_name}</td>
-                            <td>{ticketData.quantity}</td>
+                            <td className="hide_mobile">{ticketData.type_ticket}</td>
+                            <td className="hide_mobile">{ticketData.event_name}</td>
+                            <td className="hide_mobile">{ticketData.quantity}</td>
                             <td>{ticketData.attend_status ? 'Attended' : 'Not Attended'}</td>
                         </tr>
                     )}
