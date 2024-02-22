@@ -102,9 +102,11 @@ function TicketCheck() {
                     console.error(error);
                     setScanningEnabled(true);
                 }}
-                facingMode={cameraView}   
+                constraints={{
+                    video: { facingMode: cameraView }
+                  }}
             />
-            <button className={style.set_camera_button} onClick={() => setCameraView(cameraView === 'front' ? 'back' : 'front')}>
+            <button className={style.set_camera_button} onClick={() => setCameraView(cameraView === 'front' ? 'environment' : 'front')}>
                 View {cameraView === 'front' ? 'Back' : 'Front'}
                 <IconContext.Provider value={{ className: "icon" }}>
                     <BsCamera />
