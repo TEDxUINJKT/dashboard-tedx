@@ -48,7 +48,7 @@ function EditOrder(payload) {
             if (response.info !== undefined) {
                 throw new Error()
             }
-            dispatch(GetOrders())
+            dispatch(GetOrders(payload.event_id))
             ShowSuccess('Success Edit Order')
         } catch (err) {
             ShowError('Failed Edit Order')
@@ -64,17 +64,20 @@ function CheckOrder(id) {
             dispatch(FetchLoadingActions())
             const response = await api.Check_Order(id);
 
-            if (response.info !== undefined) {
-                throw new Error()
+            if (response.status === 200) {
+                ShowSuccess('Order Valid')
+                return response.data.data;
+            } else if (response.status === 203){
+                ShowError(response.data.info);
+                return;
             }
-            ShowSuccess('Order Valid')
+
         } catch (err) {
             ShowError('Order Not Valid')
         }
         dispatch(FinishLoadingActions())
     }
 }
-
 
 function GuestAttend(id) {
     return async dispatch => {

@@ -198,7 +198,10 @@ function Search({ filterBy, setFilterBy, value, setValue, orders, id }) {
   const dispatch = useDispatch();
   const generateFilterFunction = (property) => (item, filterValue) => {
     if (typeof item[property] === "boolean") {
-      return item[property] === (filterValue === "attended" ? true : false);
+      return item[property] ===
+        (filterValue === "attended" || filterValue === "refferal")
+        ? true
+        : false;
     } else if (typeof item[property] === "string") {
       return item[property].toLowerCase().includes(filterValue.toLowerCase());
     } else {
@@ -212,6 +215,7 @@ function Search({ filterBy, setFilterBy, value, setValue, orders, id }) {
     University: generateFilterFunction("university"),
     Status: generateFilterFunction("status"),
     Attended: generateFilterFunction("attend_status"),
+    Refferal: generateFilterFunction("is_refferal"),
   };
 
   useEffect(() => {
@@ -240,12 +244,14 @@ function Search({ filterBy, setFilterBy, value, setValue, orders, id }) {
                 <option value="University">University</option>
                 <option value="Status">Payment Status</option>
                 <option value="Attended">Attend Status</option>
+                <option value="Refferal">Referral</option>
               </Form.Select>
             </Form.Group>
           </Col>
           {(filterBy === "Status" ||
             filterBy === "Ticket Type" ||
-            filterBy === "Attended") && (
+            filterBy === "Attended" ||
+            filterBy === "Refferal") && (
             <Col className="col-12 col-sm-2 mt-3 mt-sm-0">
               <Form.Group className="d-flex gap-3 align-items-center">
                 <Form.Select
@@ -274,6 +280,12 @@ function Search({ filterBy, setFilterBy, value, setValue, orders, id }) {
                     <>
                       <option value={"attended"}>Attended</option>
                       <option value={"not attended"}>Not Attended</option>
+                    </>
+                  )}
+                  {filterBy === "Refferal" && (
+                    <>
+                      <option value={"refferal"}>Referral</option>
+                      <option value={"no refferal"}>No Referral</option>
                     </>
                   )}
                 </Form.Select>
