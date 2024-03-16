@@ -29,10 +29,12 @@ export default function OrderList() {
   const {
     orders = [],
     tickets = [],
+    events = [],
     auth = {},
   } = useSelector((state) => state);
   const dispatch = useDispatch();
   const { id } = useParams();
+  const selected_event = events.find((each) => each._id === id);
 
   const [isShow, setShow] = useState({ value: false, type: null, title: null });
   const [formData, setFormData] = useState({});
@@ -47,7 +49,7 @@ export default function OrderList() {
     const order_data = {
       ...data,
       event_id: id,
-      event_name: orders[0].event_name,
+      event_name: selected_event.event,
       user_id: auth.id,
     };
     dispatch(AddOrder(order_data));
