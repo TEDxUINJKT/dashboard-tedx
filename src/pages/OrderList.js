@@ -63,9 +63,9 @@ export default function OrderList() {
     setShow({ value: false, type: null, title: null });
   }
 
-  function handleDelete(id = null) {
-    if (id !== null) {
-      dispatch(DeleteOrder(id));
+  function handleDelete(id = null, event_id = null) {
+    if (id !== null && event_id !== null) {
+      dispatch(DeleteOrder(id, event_id));
     }
 
     setShow({ value: false, type: null, title: null });
@@ -75,7 +75,6 @@ export default function OrderList() {
     dispatch(GetOrders(id));
     dispatch(GetTickets(id));
   }, [dispatch, id]);
-
   return (
     <section>
       <div className={style.header_layout}>
@@ -154,7 +153,7 @@ export default function OrderList() {
                     className={style.delete_button}
                     onClick={() => {
                       setShow({ value: true, type: "remove", title: null });
-                      setFormData(order);
+                      handleDelete(order._id, order.event_id);
                     }}
                   >
                     <IconContext.Provider value={{ className: "icon" }}>

@@ -75,7 +75,7 @@ function TicketCheck() {
             setScanningEnabled(false);
             dispatch(CheckOrder(data.text))
                 .then((response) => {
-                    const { ticket_id, full_name, type_ticket, event_name, attend_status, quantity } = response
+                    const { ticket_id, full_name, type_ticket, event_name, attend_status, quantity } = response.data
                     setTicketData({
                         ticket_id: ticket_id,
                         full_name: full_name,
